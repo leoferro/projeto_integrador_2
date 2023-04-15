@@ -1,0 +1,22 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore editor files
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.idea/
+*.iml
+
+# Ignore local development files
+.env
+
+# Ignore dependencies installed with pip
+/backend/venv/
+/backend/__pycache__/
+/backend/.pytest_cache/
+/backend/.mypy_cache/
+/backend/dist/
+/backend/build/
+/backend/*.egg-info/

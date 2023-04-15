@@ -1,0 +1,15 @@
+# Ignore all files and directories in the root directory except for the backend and frontend directories
+*
+!backend/
+!frontend/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore editor files
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.idea/
+*.iml

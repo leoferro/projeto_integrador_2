@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from sqlmodel import create_engine, SQLModel
+from .models import *
 
 app = FastAPI()
 

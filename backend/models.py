@@ -1,3 +1,5 @@
+__all__ = ["Aluno", "CalendarioTurma", "Disciplina", "Pagamento", "Professor", "Turma"]
+
 from sqlmodel import SQLModel, Field
 
 

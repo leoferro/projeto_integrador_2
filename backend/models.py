@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from datetime import date
 
 from sqlmodel import Field, Relationship, SQLModel, create_engine
@@ -14,6 +12,15 @@ class AlunoTurmaLink(SQLModel, table=True):
     turma_id: int | None = Field(default=None, primary_key=True, foreign_key="turma.id")
 
 
+class Pagamento(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    data_pagamento: date
+    valor: float
+
+    aluno_id: int | None = Field(default=None, foreign_key="aluno.id")
+    aluno: "Aluno" = Relationship(back_populates="pagamentos")
+
+
 class Aluno(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     nome: str
@@ -24,24 +31,15 @@ class Aluno(SQLModel, table=True):
     ativo: bool
     status_pagamento: bool
 
-    pagamentos: list[Pagamento] = Relationship(back_populates="aluno")
-    turmas: list[Turma] = Relationship(back_populates="alunos", link_model=AlunoTurmaLink)
+    pagamentos: list["Pagamento"] = Relationship(back_populates="aluno")
+    turmas: list["Turma"] = Relationship(back_populates="alunos", link_model=AlunoTurmaLink)
 
 
 class Disciplina(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     nome: str
 
-    turmas: list[Turma] = Relationship(back_populates="disciplina")
-
-
-class Pagamento(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    data_pagamento: date
-    valor: float
-
-    aluno_id: int | None = Field(default=None, foreign_key="aluno.id")
-    aluno: Aluno = Relationship(back_populates="pagamentos")
+    turmas: list["Turma"] = Relationship(back_populates="disciplina")
 
 
 class Professor(SQLModel, table=True):
@@ -50,7 +48,7 @@ class Professor(SQLModel, table=True):
     email: str
     senha: str
 
-    turmas: list[Turma] = Relationship(back_populates="professor")
+    turmas: list["Turma"] = Relationship(back_populates="professor")
 
 
 class Turma(SQLModel, table=True):
@@ -59,10 +57,10 @@ class Turma(SQLModel, table=True):
     duracao: str
     dia_semana: int
 
-    alunos: list[Aluno] = Relationship(back_populates="turmas", link_model=AlunoTurmaLink)
+    alunos: list["Aluno"] = Relationship(back_populates="turmas", link_model=AlunoTurmaLink)
 
     disciplina_id: int | None = Field(default=None, foreign_key="disciplina.id")
-    disciplina: Disciplina = Relationship(back_populates="turmas")
+    disciplina: "Disciplina" = Relationship(back_populates="turmas")
 
     professor_id: int | None = Field(default=None, foreign_key="professor.id")
-    professor: Professor = Relationship(back_populates="turmas")
+    professor: "Professor" = Relationship(back_populates="turmas")

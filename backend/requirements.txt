@@ -1,2 +1,4 @@
 fastapi==0.95.1
+psycopg2-binary==2.9.6
+sqlmodel==0.0.8
 uvicorn[standard]==0.21.1

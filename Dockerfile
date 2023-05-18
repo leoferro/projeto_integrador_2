@@ -7,10 +7,4 @@ WORKDIR /app
 COPY ./backend /app/backend
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose port 8000 for the FastAPI application
-EXPOSE 8000
-
-# Start the FastAPI application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt

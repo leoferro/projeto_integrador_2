@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from sqlmodel import Session
 
 from ..models import Disciplina, engine
+from .professor_disciplina_link import create_pdl, PDLCreate
 
 
 router = APIRouter()
@@ -13,7 +14,7 @@ class DisciplinaBase(BaseModel):
 
 
 class DisciplinaCreate(DisciplinaBase):
-    pass
+    professor_id: int | None
 
 
 class DisciplinaRead(DisciplinaBase):
@@ -35,6 +36,13 @@ def create_disciplina(disciplina: DisciplinaCreate):
     db.add(db_disciplina)
     db.commit()
     db.refresh(db_disciplina)
+    
+    if disciplina.professor_id:
+        create_pdl(PDLCreate(**{
+            "professor_id": disciplina.professor_id,
+            "disciplina_id": db_disciplina.id
+        }))
+    
     return db_disciplina
 
 
@@ -82,3 +90,16 @@ def delete_disciplina(disciplina_id: int):
     db.delete(db_disciplina)
     db.commit()
     return {"message": "Disciplina deleted successfully"}
+
+@router.post("/disciplina_search", response_model=DisciplinaRead)
+def search_turma(data: DisciplinaBase):
+    with Session(engine) as session:
+        print(data)
+        try:
+            db_disciplina = session.query(Disciplina).where(
+                Disciplina.nome == data.nome
+            ).one()
+        except Exception as e:
+            raise HTTPException(status_code=404, detail="Turma not found")
+    
+    return db_disciplina

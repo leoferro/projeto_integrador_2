@@ -1,0 +1,23 @@
+.button-add-student {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: flex;
+    font-style: normal;
+    transition: 0.3s;
+    align-items: center;
+    font-family: Inter;
+    font-weight: 600;
+    padding-top: var(--dl-space-space-unit); 
+    padding-left: var(--dl-space-space-oneandhalfunits);
+    border-radius: 56px;
+    padding-right: var(--dl-space-space-oneandhalfunits);
+    flex-direction: column;
+    padding-bottom: var(--dl-space-space-unit);
+    justify-content: center;
+    background-color: rgb(36, 97, 255);
+    height:40px;
+    margin: 15px 15px;
+    width:150px;   }
+  .button-add-student:hover {
+    opacity: 0.75;
+  }

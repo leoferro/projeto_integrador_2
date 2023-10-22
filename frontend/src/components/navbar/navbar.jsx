@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import { Link, useLocation } from "react-router-dom/cjs/react-router-dom";
 import "./navbar.css"
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [route, setRoute] = useState(window.location.pathname);
+  const location = useLocation();
 
-  const route = window.location.pathname;
+  useEffect(() => {
+    setRoute(location.pathname);
+  }, [location]);
+
 
   const notShowRoutes = [
     "/planners",
     "/turmas",
     "/alunos",
+    "/perfil",
+    "/pagamentos"
   ]
 
   return !notShowRoutes.includes(route) && (

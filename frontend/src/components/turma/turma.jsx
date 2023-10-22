@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Modal from 'react-modal'
 import './turma-component.css'
 
 const Turma = ({i, jsonData, stringAlunos, openAModal, closeAModal, setTurmaId}) => {

@@ -6,7 +6,7 @@ import NavigationLinks from '../../components/navigation/navigation-links'
 import './turmas-cadastro.css'
 
 import { cacheLogOut, checkLoggedIn } from '../../utils/login'
-import TurmaCadastroComponent from '../../components/turma/turma-cadastro-component'
+import { TurmaCadastroComponent } from '../../components/turma'
 
 const TurmasCadastro = (props) => {
 
@@ -248,98 +248,6 @@ const TurmasCadastro = (props) => {
                 <br></br>
               </h1>
             </div>
-            <div className="turmas-cadastro-container33">
-              <div className="turmas-cadastro-container34">
-                <form className="turmas-cadastro-form">
-                  <div className="turmas-cadastro-container35">
-                    <h1>Cadastro Nova Turma</h1>
-                  </div>
-                  <div className="turmas-cadastro-container36">
-                    <input
-                      type="text"
-                      required
-                      autoFocus
-                      placeholder="Disciplina"
-                      className="turmas-cadastro-textinput1 enter-text input"
-                    />
-                  </div>
-                  <div className="turmas-cadastro-container37">
-                    <label htmlFor="time01" className="turmas-cadastro-text24">
-                      Horários de Aula
-                    </label>
-                    <div className="turmas-cadastro-container38">
-                      <select
-                        id="time01"
-                        required
-                        className="turmas-cadastro-select2"
-                      >
-                        <option value="01" selected>
-                          Segunda-feira
-                        </option>
-                        <option value="02">Terça-feira</option>
-                        <option value="03">Option 3</option>
-                      </select>
-                      <div className="turmas-cadastro-container39">
-                        <input
-                          type="number"
-                          max="23"
-                          min="00"
-                          step="1"
-                          required
-                          autoFocus
-                          placeholder="00"
-                          className="turmas-cadastro-textinput2 enter-text input"
-                        />
-                        <span>:</span>
-                        <input
-                          type="number"
-                          max="59"
-                          min="00"
-                          step="1"
-                          required
-                          autoFocus
-                          placeholder="00"
-                          className="turmas-cadastro-textinput3 enter-text input"
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        className="turmas-cadastro-button1 button button-main"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="turmas-cadastro-container40">
-                    <input
-                      type="number"
-                      min="0.0"
-                      step="0.5"
-                      required
-                      placeholder="Valor por aula"
-                      className="turmas-cadastro-textinput4 input"
-                    />
-                  </div>
-                  <div className="turmas-cadastro-container41">
-                    <input
-                      type="number"
-                      max="31"
-                      min="1"
-                      step="1"
-                      required
-                      placeholder="Dia de Vencimento"
-                      className="turmas-cadastro-textinput5 input"
-                    />
-                  </div>
-                  <button name="signup" type="submit" className="button">
-                    <span className="button button-main">
-                      <span>Cadastrar</span>
-                      <br></br>
-                    </span>
-                  </button>
-                </form>
-              </div>
-            </div>
           </div>
         </div>
         <header data-thq="thq-navbar" className="turmas-cadastro-navbar">
@@ -350,63 +258,6 @@ const TurmasCadastro = (props) => {
             data-thq="thq-navbar-btn-group"
             className="turmas-cadastro-right"
           ></div>
-          <div
-            data-thq="thq-burger-menu"
-            className="turmas-cadastro-burger-menu"
-          >
-            <svg viewBox="0 0 1024 1024" className="turmas-cadastro-icon02">
-              <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-            </svg>
-          </div>
-          <div
-            data-thq="thq-mobile-menu"
-            className="turmas-cadastro-mobile-menu"
-          >
-            <div
-              data-thq="thq-mobile-menu-nav"
-              data-role="Nav"
-              className="turmas-cadastro-nav"
-            >
-              <div className="turmas-cadastro-container42">
-                <img
-                  alt="image"
-                  src="/Branding/logo-1500h.png"
-                  className="turmas-cadastro-image"
-                />
-                <div
-                  data-thq="thq-close-menu"
-                  className="turmas-cadastro-menu-close"
-                >
-                  <svg
-                    viewBox="0 0 1024 1024"
-                    className="turmas-cadastro-icon04"
-                  >
-                    <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-                  </svg>
-                </div>
-              </div>
-              <nav
-                data-thq="thq-mobile-menu-nav-links"
-                data-role="Nav"
-                className="turmas-cadastro-nav1"
-              >
-                <span className="turmas-cadastro-text29">Features</span>
-                <span className="turmas-cadastro-text30">How it works</span>
-                <span className="turmas-cadastro-text31">Prices</span>
-                <span className="turmas-cadastro-text32">Contact</span>
-                <button className="turmas-cadastro-book button button-main">
-                  <img
-                    alt="image"
-                    src="/Icons/calendar.svg"
-                    className="turmas-cadastro-image1"
-                  />
-                  <span className="turmas-cadastro-text33">
-                    Book an appointment
-                  </span>
-                </button>
-              </nav>
-            </div>
-          </div>
           <header data-role="Header" className="main-nav-bar">
             <Link to='/'>
               <img

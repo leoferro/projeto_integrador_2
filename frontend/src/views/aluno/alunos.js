@@ -1,28 +1,69 @@
-import React, {useState, useEffect} from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import DangerousHTML from 'dangerous-html/react'
-import { Helmet } from 'react-helmet'
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { cacheLogOut, checkLoggedIn } from "../../utils/login";
+import AlunoModal from "../../components/aluno/modal/aluno-modal";
+import { AlunosFiltro } from "../../components/aluno";
+import Modal from "react-modal";
 
-import NavigationLinks from '../../components/navigation/navigation-links'
-import './alunos.css'
-
-import { cacheLogOut, checkLoggedIn } from '../../utils/login'
-import Footer from '../../components/footer/footer'
+import NavigationLinks from "../../components/navigation/navigation-links";
+import "./alunos.css";
+import axios from "axios";
 
 const Alunos = (props) => {
-
-  const history = useHistory()
-  const [user, setUser] = useState()
+  const history = useHistory();
+  const [user, setUser] = useState();
+  const [modalOpen, setIsOpen] = useState(false);
+  const [alunos, setAlunos] = useState([]);
+  const [navBarStyle, setNavBarStyle] = useState("turmas-navbar");
 
   useEffect(() => {
-    setUser(checkLoggedIn())
+    setUser(checkLoggedIn());
 
-    if(checkLoggedIn() == undefined){
+    if (checkLoggedIn() == undefined) {
       // console.log(user)
-      history.push("/")
+      history.push("/");
     }
+  }, []);
 
-  }, [])
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const loadAlunos = async () => {
+    const url = "http://localhost:8000/aluno";
+
+    const dados = {
+      skip: 0,
+      limit: 100,
+    };
+
+    try {
+      const response = await axios.get(url, dados, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response) {
+        alert("Erro ao carregar alunos");
+        return;
+      }
+      console.log("SETANDO ALUNOS => ", response.data);
+      setAlunos(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Erro ao carregar alunos");
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      loadAlunos();
+    }
+  }, [user]);
 
   return (
     <div className="alunos-container">
@@ -30,218 +71,42 @@ const Alunos = (props) => {
         <title>Alunos - Classtool</title>
         <meta property="og:title" content="Alunos - Classtool" />
       </Helmet>
+      <Modal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        onAfterOpen={() => {
+          setNavBarStyle("turmas-navbar-open");
+        }}
+        onAfterClose={() => {
+          setNavBarStyle("turmas-navbar");
+        }}
+        style={{
+          content: {
+            top: "0px",
+            left: "0px",
+            right: "0px",
+            bottom: "0px",
+            padding: "24px",
+            position: "absolute",
+            width: "70%",
+            height: "90%",
+            margin: "auto",
+            display: "flex",
+            borderRadius: "12px",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0px 0px 25px -2px rgba(66, 68, 90, 0.4)",
+            backgroundColor: "#ffffff",
+          },
+          overlay: {
+            backdropFilter: "blur(4px)",
+          },
+        }}
+      >
+        <AlunoModal />
+      </Modal>
       <section className="alunos-hero">
-        <div className="alunos-container01">
-          <div className="alunos-container02">
-            <div className="alunos-container03">
-              <h1>
-                <span>Filtros</span>
-                <br></br>
-              </h1>
-            </div>
-            <div className="alunos-container04">
-              <div className="alunos-container05">
-                <input
-                  type="text"
-                  placeholder="Digite algo"
-                  className="alunos-textinput input"
-                />
-              </div>
-              <div className="alunos-container06">
-                <div className="alunos-container07">
-                  <div className="alunos-container08">
-                    <h1 className="alunos-text03">Aluno</h1>
-                  </div>
-                  <div className="alunos-container09">
-                    <div
-                      data-thq="thq-dropdown"
-                      className="alunos-thq-dropdown list-item"
-                    >
-                      <ul
-                        data-thq="thq-dropdown-list"
-                        className="alunos-dropdown-list"
-                      >
-                        <li
-                          data-thq="thq-dropdown"
-                          className="alunos-dropdown list-item"
-                        >
-                          <div
-                            data-thq="thq-dropdown-toggle"
-                            className="alunos-dropdown-toggle"
-                          >
-                            <span className="alunos-text04">Todos</span>
-                          </div>
-                        </li>
-                        <li
-                          data-thq="thq-dropdown"
-                          className="alunos-dropdown1 list-item"
-                        >
-                          <div
-                            data-thq="thq-dropdown-toggle"
-                            className="alunos-dropdown-toggle1"
-                          ></div>
-                        </li>
-                        <li
-                          data-thq="thq-dropdown"
-                          className="alunos-dropdown2 list-item"
-                        >
-                          <div
-                            data-thq="thq-dropdown-toggle"
-                            className="alunos-dropdown-toggle2"
-                          >
-                            <span className="alunos-text05">Sub-menu Item</span>
-                          </div>
-                        </li>
-                        <li
-                          data-thq="thq-dropdown"
-                          className="alunos-dropdown3 list-item"
-                        >
-                          <div
-                            data-thq="thq-dropdown-toggle"
-                            className="alunos-dropdown-toggle3"
-                          >
-                            <span className="alunos-text06">Sub-menu Item</span>
-                          </div>
-                        </li>
-                        <li
-                          data-thq="thq-dropdown"
-                          className="alunos-dropdown4 list-item"
-                        >
-                          <div
-                            data-thq="thq-dropdown-toggle"
-                            className="alunos-dropdown-toggle4"
-                          >
-                            <span className="alunos-text07">Sub-menu Item</span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Nome aluno"
-                      className="alunos-textinput1 input"
-                    />
-                  </div>
-                </div>
-                <div className="alunos-container10">
-                  <div className="alunos-container11">
-                    <h1 className="alunos-text08">Dia da Semana</h1>
-                  </div>
-                  <div className="alunos-container12">
-                    <div className="daysweek">
-                      <input type="checkbox" />
-                      <span className="alunos-text09">Segunda-feira</span>
-                    </div>
-                    <div className="alunos-container14 daysweek">
-                      <input type="checkbox" />
-                      <span className="alunos-text10">Terça-feira</span>
-                    </div>
-                    <div className="alunos-container15 daysweek">
-                      <input type="checkbox"/>
-                      <span className="alunos-text11 daysweek">
-                        Quarta-feira
-                      </span>
-                    </div>
-                    <div className="alunos-container16 daysweek">
-                      <input type="checkbox" />
-                      <span className="alunos-text12">Quinta-feira</span>
-                    </div>
-                    <div className="alunos-container17 daysweek">
-                      <input type="checkbox" />
-                      <span className="alunos-text13">Sexta-feira</span>
-                    </div>
-                    <div className="alunos-container18 daysweek">
-                      <input type="checkbox"/>
-                      <span className="alunos-text14">Sábado</span>
-                    </div>
-                    <div className="alunos-container19 daysweek">
-                      <input type="checkbox" />
-                      <span className="alunos-text15">Domingo</span>
-                    </div>
-                  </div>
-                  <div className="alunos-container20 daysweek">
-                    <input type="checkbox" />
-                    <span className="alunos-text16">Todos</span>
-                  </div>
-                </div>
-                <div className="alunos-container21">
-                  <div className="alunos-container22">
-                    <h1 className="alunos-text17">Status pagamento</h1>
-                  </div>
-                  <div className="alunos-container23">
-                    <select onChange={e => {}} className="alunos-select">
-                      <option value="Option 1">
-                        Todos
-                      </option>
-                      <option value="Option 1">Em dia</option>
-                      <option value="New Option">Pendente</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="alunos-container24">
-                  <div className="alunos-container25">
-                    <button className="button button-main">
-                      <Link to="/alunos-cadastro">Cadastrar novo aluno</Link>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="alunos-container26">
-            <div className="alunos-container27">
-              <h1>
-                <span>Meus alunos</span>
-                <br></br>
-              </h1>
-            </div>
-            <div className="alunos-container28">
-              <div
-                data-thq="thq-dropdown"
-                className="alunos-thq-dropdown1 list-item"
-              >
-                <ul
-                  data-thq="thq-dropdown-list"
-                  className="alunos-dropdown-list1"
-                >
-                  <li
-                    data-thq="thq-dropdown"
-                    className="alunos-dropdown5 list-item"
-                  >
-                    <div
-                      data-thq="thq-dropdown-toggle"
-                      className="alunos-dropdown-toggle5"
-                    >
-                      <span className="alunos-text21">Sub-menu Item</span>
-                    </div>
-                  </li>
-                  <li
-                    data-thq="thq-dropdown"
-                    className="alunos-dropdown6 list-item"
-                  >
-                    <div
-                      data-thq="thq-dropdown-toggle"
-                      className="alunos-dropdown-toggle6"
-                    >
-                      <span className="alunos-text22">Sub-menu Item</span>
-                    </div>
-                  </li>
-                  <li
-                    data-thq="thq-dropdown"
-                    className="alunos-dropdown7 list-item"
-                  >
-                    <div
-                      data-thq="thq-dropdown-toggle"
-                      className="alunos-dropdown-toggle7"
-                    >
-                      <span className="alunos-text23">Sub-menu Item</span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
         <header data-thq="thq-navbar" className="alunos-navbar">
           <div className="alunos-left">
             <nav className="alunos-links"></nav>
@@ -291,7 +156,7 @@ const Alunos = (props) => {
             </div>
           </div>
           <header data-role="Header" className="main-nav-bar">
-            <Link to='/'>
+            <Link to="/">
               <img
                 alt="logo"
                 src="/Icons/logo_transparent-300h.png"
@@ -311,7 +176,9 @@ const Alunos = (props) => {
             <div className="alunos-btn-group">
               <button className="alunos-login button">
                 <span>
-                  <Link to="/"><span onClick={cacheLogOut}>Sair</span></Link>
+                  <Link to="/">
+                    <span onClick={cacheLogOut}>Sair</span>
+                  </Link>
                   <br></br>
                 </span>
               </button>
@@ -363,9 +230,62 @@ const Alunos = (props) => {
             </div>
           </header>
         </header>
+        <div className="alunos-container27">
+          <h1>Meus alunos</h1>
+        </div>
+        <div className="alunos-container-master">
+          <AlunosFiltro openModal={openModal} />
+          <div className="alunos-container26">
+            <div className="alunos-container28">
+              <div
+                data-thq="thq-dropdown"
+                className="alunos-thq-dropdown1 list-item"
+              >
+                <ul
+                  data-thq="thq-dropdown-list"
+                  className="alunos-dropdown-list1"
+                >
+                  <li
+                    data-thq="thq-dropdown"
+                    className="alunos-dropdown5 list-item"
+                  >
+                    <div
+                      data-thq="thq-dropdown-toggle"
+                      className="alunos-dropdown-toggle5"
+                    >
+                      <span className="alunos-text21">Sub-menu Item</span>
+                    </div>
+                  </li>
+                  <li
+                    data-thq="thq-dropdown"
+                    className="alunos-dropdown6 list-item"
+                  >
+                    <div
+                      data-thq="thq-dropdown-toggle"
+                      className="alunos-dropdown-toggle6"
+                    >
+                      <span className="alunos-text22">Sub-menu Item</span>
+                    </div>
+                  </li>
+                  <li
+                    data-thq="thq-dropdown"
+                    className="alunos-dropdown7 list-item"
+                  >
+                    <div
+                      data-thq="thq-dropdown-toggle"
+                      className="alunos-dropdown-toggle7"
+                    >
+                      <span className="alunos-text23">Sub-menu Item</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Alunos
+export default Alunos;

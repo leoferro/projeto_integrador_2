@@ -1,0 +1,16 @@
+export default {
+  today: 'Hoje',
+  previous: 'Anterior',
+  next: 'Próximo',
+  month: 'Mês',
+  week: 'Semana',
+  day: 'Dia',
+  agenda: 'Agenda',
+  date: 'Data',
+  allDay: 'O dia todo',
+  time: 'Hora',
+  event: 'Evento',
+  noEventsInRange: 'Não há eventos nesta faixa de datas.',
+  showMore: total => `+${total} mais`,
+  twoMore: 'mais dois',
+};

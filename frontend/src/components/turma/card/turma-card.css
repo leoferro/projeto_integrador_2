@@ -1,0 +1,34 @@
+.turma-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-white);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.turma-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.turma-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.turma-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}

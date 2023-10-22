@@ -1,7 +1,7 @@
 .alunos-container {
   width: 100%;
   display: flex;
-  overflow: hidden;;
+  overflow: hidden;
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
@@ -17,22 +17,14 @@
   border-width: 1px;
   flex-direction: column;
 }
-.alunos-container01 {
-  top: 214px;
-  left: 0px;
-  right: 0px;
-  width: 860px;
-  height: 741px;
+.alunos-container-master {
+  width: 100%;
   display: flex;
-  position: absolute;
-  margin-top: auto;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 0px;
-  margin-bottom: auto;
   flex-direction: row;
   justify-content: flex-start;
+  padding: 0 var(--dl-space-space-fiveunits);
+  gap: 1em;
+  margin-top: 1em;
 }
 .alunos-container02 {
   width: 264px;
@@ -129,7 +121,7 @@
   min-width: 100%;
   transition: 0.3s;
   align-items: stretch;
-  border-color: #D9D9D9;
+  border-color: #d9d9d9;
   border-width: 1px;
   border-radius: var(--dl-radius-radius-radius4);
   flex-direction: column;
@@ -497,7 +489,7 @@
   min-width: 100%;
   transition: 0.3s;
   align-items: stretch;
-  border-color: #D9D9D9;
+  border-color: #d9d9d9;
   border-width: 1px;
   border-radius: var(--dl-radius-radius-radius4);
   flex-direction: column;
@@ -841,7 +833,7 @@
   color: rgb(255, 255, 255);
   font-size: 12px;
 }
-@media(max-width: 991px) {
+@media (max-width: 991px) {
   .alunos-hero {
     flex: 1;
     height: 0px;
@@ -859,7 +851,7 @@
     display: flex;
     padding: var(--dl-space-space-unit);
     border-radius: var(--dl-radius-radius-round);
-    background-color: #2461FF;
+    background-color: #2461ff;
   }
   .alunos-icon {
     fill: white;
@@ -885,7 +877,7 @@
     gap: var(--dl-space-space-oneandhalfunits);
   }
 }
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .alunos-navbar {
     padding-left: var(--dl-space-space-oneandhalfunits);
     padding-right: var(--dl-space-space-oneandhalfunits);
@@ -919,7 +911,7 @@
     line-height: 18px;
   }
 }
-@media(max-width: 479px) {
+@media (max-width: 479px) {
   .alunos-navbar {
     padding: var(--dl-space-space-unit);
   }

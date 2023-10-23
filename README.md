@@ -1,6 +1,10 @@
 # Projeto integrador 1
 
-Repositório para guardarmos o desenvolvimento do projeto integrador 1.
+Repositório para guardarmos o desenvolvimento do projeto integrador 2.
+
+## IMPORTANTE!
+
+O container do frontend ainda não está funcionando!
 
 ## Requirements
 
@@ -10,29 +14,33 @@ Repositório para guardarmos o desenvolvimento do projeto integrador 1.
 
 ### Running the Backend
 
-1. Install Docker: https://www.docker.com/get-started
+1. Instale o Docker: https://www.docker.com/get-started
 
-2. Clone the repository:
-
-```bash
-git clone https://github.com/luaoliveira/projeto_integrador_1.git
-```
-
-3. Navigate to the project directory:
+2. Clone o repositório:
 
 ```bash
-cd projeto_integrador_1
+git clone https://github.com/leoferro/projeto_integrador_2.git
 ```
 
-4. Start the Docker Compose stack:
+3. Navegue até o diretório do projeto:
+
+```bash
+cd projeto_integrador_2
+```
+
+4. Inicie os containers com o Docker Compose:
 
 ```bash
 docker-compose up
 ```
 
-This command starts the stack and maps port 8000 on the host to port 8000 in the container.
+Este comando iniciará 3 containers: dev_database, dev_backend e dev_frontend.
+O container dev_database mapeia a porta 5432 do host à porta 5432 do container.
+O container dev_backend mapeia a porta 8000 do host à porta 8000 do container.
+O container dev_frontend mapeia a porta 3000 do host à porta 3000 do container.
 
-5. Access the API at `http://localhost:8000/`.
+5. Acesse a API em `http://localhost:8000/`.
+6. Acesse o frontend em `http://localhost:3000/`
 
 
 ## License

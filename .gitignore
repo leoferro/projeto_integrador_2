@@ -20,3 +20,6 @@ __pycache__/
 /backend/dist/
 /backend/build/
 /backend/*.egg-info/
+
+# Ignore node_modules
+/frontend/node_modules

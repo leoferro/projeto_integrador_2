@@ -2,17 +2,11 @@
 
 Repositório para guardarmos o desenvolvimento do projeto integrador 2.
 
-## IMPORTANTE!
-
-O container do frontend ainda não está funcionando!
-
 ## Requirements
 
 - Docker
 
-## Getting Started
-
-### Running the Backend
+### Rodando as aplicações
 
 1. Instale o Docker: https://www.docker.com/get-started
 
@@ -35,14 +29,14 @@ docker-compose up
 ```
 
 Este comando iniciará 3 containers: dev_database, dev_backend e dev_frontend.
-O container dev_database mapeia a porta 5432 do host à porta 5432 do container.
-O container dev_backend mapeia a porta 8000 do host à porta 8000 do container.
-O container dev_frontend mapeia a porta 3000 do host à porta 3000 do container.
+- O container dev_database mapeia a porta 5432 do host à porta 5432 do container.
+- O container dev_backend mapeia a porta 8000 do host à porta 8000 do container.
+- O container dev_frontend mapeia a porta 80 do host à porta 3000 do container.
 
 5. Acesse a API em `http://localhost:8000/`.
-6. Acesse o frontend em `http://localhost:3000/`
+6. Acesse o frontend em `http://localhost`
 
 
-## License
+## Licença
 
 This project is licensed under the [MIT License](LICENSE).

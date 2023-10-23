@@ -1,4 +1,4 @@
-# Projeto integrador 1
+# Projeto integrador 2
 
 Repositório para guardarmos o desenvolvimento do projeto integrador 2.
 

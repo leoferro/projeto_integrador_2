@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./aluno-cadastro.css";
+import axios from "axios";
 
 const AlunoCadastro = () => {
   const [nome, setNome] = useState("");
@@ -9,9 +10,35 @@ const AlunoCadastro = () => {
   const [telefone, setTelefone] = useState("");
   const [ativo, setAtivo] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log({ nome, dataNasc, email, telefone, ativo });
+
+    const url = "http://localhost:8000/aluno";
+
+    const dados = {
+      nome,
+      data_nascimento: dataNasc,
+      email,
+      telefone,
+      ativo,
+    };
+
+    try {
+      const response = await axios.post(url, dados, {
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      if (!response) {
+        alert("Erro ao cadastrar aluno");
+        return;
+      }
+  
+      alert("Aluno cadastrado com sucesso");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Erro ao cadastrar aluno");
+    }
   };
 
   return (

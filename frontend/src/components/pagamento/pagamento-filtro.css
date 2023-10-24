@@ -1,0 +1,632 @@
+.filtro-container {
+    width: 264px;
+    height: 100%;
+    display: flex;
+    box-shadow: 5px 5px 10px 0px #d4d4d4;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgba(217, 217, 217, 0.29);
+  }
+  .pagamentos-container03 {
+    width: 100%;
+    height: 77px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .filtros-first {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .pagamentos-container05 {
+    width: 100%;
+    height: 91px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pagamentos-textinput {
+    width: 238px;
+    height: 40px;
+    align-self: center;
+    text-align: center;
+    border-color: rgba(131, 127, 127, 0.43);
+    border-style: ridge;
+  }
+  .pagamentos-container06 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .pagamentos-container07 {
+    width: 100%;
+    height: 93px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .pagamentos-container08 {
+    width: 100%;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    padding-top: 0px;
+    padding-left: 00px;
+    padding-right: 00px;
+    flex-direction: column;
+    padding-bottom: 0px;
+    justify-content: flex-start;
+  }
+  .pagamentos-text03 {
+    font-size: 16px;
+  }
+  .pagamentos-container09 {
+    width: 100%;
+    height: 63px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .pagamentos-thq-dropdown {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle {
+    fill: #595959;
+    color: #595959;
+    width: 241px;
+    display: inline-flex;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    border-color: rgba(131, 127, 127, 0.43);
+    border-width: 1px;
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius2);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+    justify-content: center;
+    background-color: #ffffff;
+  }
+  .pagamentos-text04 {
+    font-size: 16px;
+    font-style: normal;
+    text-align: center;
+    font-weight: 500;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .pagamentos-dropdown-arrow {
+    transition: 0.3s;
+  }
+  .pagamentos-icon {
+    width: 18px;
+    height: 18px;
+    margin-top: auto;
+    transition: 0.3s;
+    margin-bottom: auto;
+  }
+  .pagamentos-dropdown-list {
+    left: 0%;
+    width: max-content;
+    display: none;
+    z-index: 100;
+    position: absolute;
+    min-width: 100%;
+    transition: 0.3s;
+    align-items: stretch;
+    border-color: #D9D9D9;
+    border-width: 1px;
+    border-radius: var(--dl-radius-radius-radius4);
+    flex-direction: column;
+    list-style-type: none;
+    background-color: var(--dl-color-gray-white);
+    list-style-position: inside;
+  }
+  .pagamentos-dropdown {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle01 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle01:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text05 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-dropdown01 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle02 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle02:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-dropdown02 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle03 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle03:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text06 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-dropdown03 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle04 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle04:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text07 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-dropdown04 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle05 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle05:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text08 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-container10 {
+    width: 100%;
+    height: 255px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .pagamentos-container11 {
+    width: 100%;
+    height: 197px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .pagamentos-container12 {
+    width: 100%;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    padding-top: 0px;
+    padding-left: 00px;
+    padding-right: 00px;
+    flex-direction: column;
+    padding-bottom: 0px;
+    justify-content: flex-start;
+  }
+  .pagamentos-text09 {
+    font-size: 16px;
+  }
+  .pagamentos-container13 {
+    width: 100%;
+    height: 63px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .pagamentos-thq-dropdown1 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle06 {
+    fill: #595959;
+    color: #595959;
+    width: 241px;
+    display: inline-flex;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    border-color: rgba(131, 127, 127, 0.43);
+    border-width: 1px;
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius2);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+    justify-content: center;
+    background-color: #ffffff;
+  }
+  .pagamentos-text10 {
+    font-size: 16px;
+    font-style: normal;
+    text-align: center;
+    font-weight: 500;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .pagamentos-dropdown-arrow1 {
+    transition: 0.3s;
+  }
+  .pagamentos-icon02 {
+    width: 18px;
+    height: 18px;
+    margin-top: auto;
+    transition: 0.3s;
+    margin-bottom: auto;
+  }
+  .pagamentos-dropdown-list1 {
+    left: 0%;
+    width: max-content;
+    display: none;
+    z-index: 100;
+    position: absolute;
+    min-width: 100%;
+    transition: 0.3s;
+    align-items: stretch;
+    border-color: #D9D9D9;
+    border-width: 1px;
+    border-radius: var(--dl-radius-radius-radius4);
+    flex-direction: column;
+    list-style-type: none;
+    background-color: var(--dl-color-gray-white);
+    list-style-position: inside;
+  }
+  .pagamentos-dropdown05 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle07 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle07:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text11 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-dropdown06 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle08 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle08:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-dropdown07 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle09 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle09:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text12 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-dropdown08 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle10 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle10:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text13 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-dropdown09 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+  .pagamentos-dropdown-toggle11 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+  .pagamentos-dropdown-toggle11:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+  .pagamentos-text14 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .pagamentos-container14 {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+  }
+  .pagamentos-text15 {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .pagamentos-container15 {
+    width: 100%;
+    height: 79px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--dl-space-space-unit);
+    flex-direction: column;
+  }
+  .pagamentos-container16 {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--dl-space-space-halfunit);
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pagamentos-text16 {
+    font-size: 16px;
+  }
+  .pagamentos-container17 {
+    width: 100%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pagamentos-select {
+    width: 238px;
+    height: 40px;
+    border-color: rgba(131, 127, 127, 0.43);
+    border-width: 1px;
+  }
+  .pagamentos-container18 {
+    width: 100%;
+    height: 172px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .pagamentos-container19 {
+    width: 100%;
+    height: 104px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .pagamentos-container20 {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pagamentos-text17 {
+    font-size: 16px;
+  }
+  .pagamentos-container21 {
+    width: 244px;
+    height: 50%;
+    margin: 0px;
+    display: flex;
+    margin-top: var(--dl-space-space-halfunit);
+    align-items: center;
+    margin-left: var(--dl-space-space-halfunit);
+    margin-right: var(--dl-space-space-halfunit);
+    margin-bottom: var(--dl-space-space-halfunit);
+    flex-direction: row;
+    justify-content: center;
+  }
+  .pagamentos-container22 {
+    width: 60px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-halfunit);
+    padding-right: var(--dl-space-space-halfunit);
+    flex-direction: column;
+    padding-bottom: var(--dl-space-space-halfunit);
+    justify-content: center;
+  }

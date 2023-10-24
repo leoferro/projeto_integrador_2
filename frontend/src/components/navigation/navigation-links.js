@@ -9,10 +9,10 @@ const NavigationLinks = (props) => {
   return (
     <nav className={`navigation-links-nav ${props.rootClassName} `}>
       <Link to="/perfil"className="navigation-links-text">{props.text}</Link>
-      <Link to="/planners" className="navigation-links-text1">{props.text1}</Link>
-      <Link to="/pagamentos" className="navigation-links-text2">{props.text2}</Link>
-      <Link to="/turmas" className="navigation-links-text3">{props.text3}</Link>
-      <Link to="/alunos" className="navigation-links-text4">{props.text4}</Link>
+      <Link to="/planners" className="navigation-links-text">{props.text1}</Link>
+      <Link to="/pagamentos" className="navigation-links-text">{props.text2}</Link>
+      <Link to="/turmas" className="navigation-links-text">{props.text3}</Link>
+      <Link to="/alunos" className="navigation-links-text">{props.text4}</Link>
     </nav>
   )
 }

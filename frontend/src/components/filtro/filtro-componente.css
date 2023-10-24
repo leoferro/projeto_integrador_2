@@ -1,0 +1,83 @@
+/* Estilos para o container principal */
+.filtro-container {
+  padding: 20px;
+  min-height: 300px;
+}
+
+/* Estilos para a primeira seção de filtros */
+.filtros {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+}
+
+/* Estilos para os containers dos diferentes elementos */
+.input-container,
+.dropdown-container,
+.checkbox-container,
+.label-container,
+.button-container {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Estilos para o campo de input */
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Estilos para o rótulo do dropdown */
+.dropdown-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Estilos para o dropdown */
+.dropdown-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Estilos para o rótulo do checkbox */
+.checkbox-label {
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+/* Estilos para o rótulo "Quantidade de alunos" */
+.label {
+  font-size: 16px;
+}
+
+/* Estilos para o botão "Cadastrar novo registro" */
+.button-main {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button-main:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,5 @@
+.header {
+    width: 100%;
+    min-width: 100vw;
+    padding: 0 var(--dl-space-space-fiveunits);
+}

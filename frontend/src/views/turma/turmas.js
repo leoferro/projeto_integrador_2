@@ -11,6 +11,8 @@ import { cacheLogOut, checkLoggedIn } from "../../utils/login";
 import TurmaFiltro from "./turma-filtro";
 import axios from "axios";
 import { TurmaCard } from "../../components/turma";
+import Header from "../../components/header/header";
+import FiltroComponente from "../../components/filtro/filtro-component";
 
 const Turmas = () => {
   //const history = useHistory()
@@ -18,6 +20,12 @@ const Turmas = () => {
   const [modalOpen, setIsOpen] = useState(false);
   const [navBarStyle, setNavBarStyle] = useState("turmas-navbar");
   const [turmas, setTurmas] = useState([]);
+  const [turmasFiltro, setTurmasFiltro] = useState({
+    qtdAluno: null,
+    diaSemana: null,
+    vencimento: null,
+    txtPesquisa: null,
+  });
 
   useEffect(() => {
     setUser(checkLoggedIn());
@@ -67,6 +75,42 @@ const Turmas = () => {
     }
   }, [user]);
 
+  const filtros = {
+    qtdAluno: {
+      handler: (value) => {
+        setTurmasFiltro({
+          ...turmasFiltro,
+          qtdAluno: value != 0 ? value : null,
+        });
+      },
+    },
+    diaSemana: {
+      handler: (value) => {
+        setTurmasFiltro({
+          ...turmasFiltro,
+          diaSemana: value != 0 ? value : null,
+        });
+      },
+    },
+    vencimento: {
+      handler: (value) => {
+        setTurmasFiltro({
+          ...turmasFiltro,
+          vencimento: value != 0 ? value : null,
+        });
+      },
+    },
+    pesquisa: {
+      handler: (value) => {
+        console.log("USANDO HANDLER")
+        setTurmasFiltro({
+          ...turmasFiltro,
+          txtPesquisa: value,
+        });
+      },
+    },
+  };
+
   return (
     <div className="turmas-container">
       <Helmet>
@@ -110,51 +154,72 @@ const Turmas = () => {
           <TurmaModal />
         </Modal>
       </div>
-      <header data-thq="thq-navbar" className={navBarStyle}>
-        <div className="turmas-left">
-          <nav className="turmas-links"></nav>
-        </div>
-        <header data-role="Header" className="main-nav-bar">
-          <Link to="/">
-            <img
-              alt="logo"
-              src="/Icons/logo_transparent-300h.png"
-              className="turmas-image08"
-            />
-          </Link>
-          <div className="turmas-nav2">
-            <NavigationLinks
-              text="Perfil"
-              text1="Planners"
-              text2="Pagamentos"
-              text3="Turmas"
-              text4="Alunos"
-              rootClassName="rootClassName14"
-            />
-          </div>
-          <div className="turmas-btn-group">
-            <button className="turmas-login button">
-              <span>
-                <Link to="/">
-                  <span onClick={cacheLogOut}>Sair</span>
-                </Link>
-                <br></br>
-              </span>
-            </button>
-          </div>
-        </header>
-      </header>
+      <Header />
       <section className="turmas-hero">
-        <h1>
-        Minhas turmas
-        </h1>
+        <h1>Minhas turmas</h1>
         <div className="turmas-container-master">
-          <TurmaFiltro openModal={openModal} />
+          {/* <TurmaFiltro openModal={openModal} /> */}
+          <FiltroComponente openModal={openModal} filtros={filtros} />
           <div className="turmas-container">
             <div className="turmas-grid">
-              {turmas.map((turma) => (
-                <TurmaCard key={turma.id} turma={turma} />
-              ))}
+              {turmas
+                .filter((turma) => {
+                  let filtroDiaSemana = null;
+                  let filtroQtdAluno = null;
+                  let filtroVencimento = null;
+                  let filtroPesquisa = null;
+
+                  const checaFiltro = (filtro) => {
+                    return filtro == null || filtro;
+                  };
+
+                  if (turmasFiltro.diaSemana) {
+                    filtroDiaSemana =
+                      turma.dia_semana === Number(turmasFiltro.diaSemana);
+                  }
+
+                  if (turmasFiltro.qtdAluno) {
+                    if (turmasFiltro.qtdAluno.includes("+")) {
+                      filtroQtdAluno =
+                        turma.alunos.length >=
+                        Number(turmasFiltro.qtdAluno.replace("+", ""));
+                    } else {
+                      filtroQtdAluno =
+                        turma.alunos.length == Number(turmasFiltro.qtdAluno);
+                    }
+                  }
+
+                  if (turmasFiltro.vencimento) {
+                    filtroVencimento =
+                      turma.vencimento === Number(turmasFiltro.vencimento);
+                  }
+
+                  if (
+                    turmasFiltro.txtPesquisa &&
+                    turmasFiltro.txtPesquisa != ""
+                  ) {
+                    filtroPesquisa = turma.disciplina
+                      .toLowerCase()
+                      .includes(turmasFiltro.txtPesquisa.toLowerCase());
+                  }
+
+                  return (
+                    checaFiltro(filtroDiaSemana) 
+                    && checaFiltro(filtroQtdAluno)
+                    && checaFiltro(filtroVencimento)
+                    && checaFiltro(filtroPesquisa)
+                  );
+                })
+                .map((turma) => {
+                  return (
+                    <Link
+                      to={`/turma/${turma.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <TurmaCard key={turma.id} turma={turma} />
+                    </Link>
+                  );
+                })}
             </div>
           </div>
         </div>

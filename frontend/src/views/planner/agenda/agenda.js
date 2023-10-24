@@ -10,22 +10,19 @@ const Agenda = ({ eventos }) => {
   const [events, setEvents] = useState();
   const localizer = momentLocalizer(moment);
 
-  const eventss = [
-    {
-      title: "Recurring Event",
-      start: moment().startOf("day").add(2, "hours").toDate(),
-      end: moment().startOf("day").add(4, "hours").toDate(),
-      allDay: false,
-      rrule: {
-        freq: "weekly",
-        interval: 1,
-        byweekday: [moment().day("Monday").weekday()],
-      },
-    },
-  ];
-
-  console.log("RECEBI EVENTOS", eventos)
-
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    const style = {
+      backgroundColor: event.color,
+      borderRadius: '5px',
+      opacity: 0.8,
+      color: 'white',
+      border: '0px',
+      display: 'block'
+    };
+    return {
+      style
+    };
+  };
   // os eventos podem ser turmas (aulas) ou pagamentos
 
   // turmas virao com horario_inicial, horario_final, dia_semana
@@ -52,9 +49,21 @@ const Agenda = ({ eventos }) => {
             .day(diaSemana)
             .toDate(),
           allDay: false,
+          color: 'blue'
         };
 
-        eventosFormatados.push(eventoFormatado);
+        // loop para adicionar aulas recorrentes
+        let initialDate = moment(eventoFormatado.start);
+        let finalDate = moment(eventoFormatado.start).add(1, "month");
+        while (finalDate.isAfter(initialDate)) {
+          const novoEvento = {
+            ...eventoFormatado,
+            start: initialDate.toDate(),
+            end: initialDate.hour(horarioFinal.hour()).minute(horarioFinal.minute()).toDate(),
+          };
+          eventosFormatados.push(novoEvento);
+          initialDate = initialDate.add(1, "week");
+        }
       } else if (evento.data) {
         const data = moment(evento.data);
 
@@ -63,6 +72,7 @@ const Agenda = ({ eventos }) => {
           start: data.toDate(),
           end: data.toDate(),
           allDay: true,
+          color: 'green'
         };
 
         eventosFormatados.push(eventoFormatado);
@@ -82,7 +92,7 @@ const Agenda = ({ eventos }) => {
         endAccessor="end"
         views={["day", "week", "month"]}
         selectable={false}
-        eventPropGetter={() => ({ className: "read-only-event" })}
+        eventPropGetter={eventStyleGetter}
         style={{ width: "100%", height: "100%" }}
       />
     </div>

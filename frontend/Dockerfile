@@ -1,18 +1,15 @@
-#
-# https://stackoverflow.com/questions/51097652/install-node-modules-inside-docker-container-and-synchronize-them-with-host
-#
-
 FROM node:16
 ENV NODE_ENV development
 
+WORKDIR /app
+
 # Copia o arquivo de packages e instala as dependências.
-WORKDIR /home/node/app
 COPY ./package.json .
 COPY ./package-lock.json .
 RUN npm install
 
-# Install the application's dependencies into the node_modules's cache directory.
-# COPY . .
+# Copia o restante dos arquivos
+ COPY . .
 
 # Expose port 3000
 EXPOSE 3000

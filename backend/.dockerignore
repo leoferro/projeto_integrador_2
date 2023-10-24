@@ -1,4 +1,3 @@
 # Ignore all files and directories in the root directory except for the backend and frontend directories
-*node_modules
 .dockerignore
 Dockerfile

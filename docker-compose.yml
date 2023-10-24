@@ -16,12 +16,9 @@ services:
   backend:
     build: ./backend/
     container_name: dev_backend
-    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
     working_dir: /app
     ports:
       - '8000:8000'
-    volumes:
-      - .:/app
     depends_on:
       - postgres
     extra_hosts:
@@ -31,15 +28,14 @@ services:
   frontend:
     build: ./frontend/
     container_name: dev_frontend
-    volumes:
-      - ./frontend/:/home/node/app
     user: "node"
-    working_dir: /home/node/app
+    working_dir: /app
     environment:
       - NODE_ENV=development
     ports:
       - '80:3000'
-    command: npm start
+    depends_on:
+      - backend
     restart: always
 
 volumes:

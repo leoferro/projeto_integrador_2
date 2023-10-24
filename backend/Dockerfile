@@ -1,12 +1,18 @@
 FROM python:3.11.3-slim-bullseye
 
-# Set the working directory to /app
+# Seta o diretório de trabalho para /app e cria uma estrutura mínima de subdiretórios
+# Essa estrutura de subdiretórios é necessário por causa do projeto do FastAPI
 WORKDIR /app
+RUN mkdir backend
 
-# Copy the current directory contents into the container at /app
-COPY . .
+COPY requirements.txt ./backend
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Instala os módulos do python necessários ao projeto
+RUN pip install --no-cache-dir -r ./backend/requirements.txt
+
+# Copia o restande dos arquivos para /app/backend
+COPY . ./backend
 
 EXPOSE 8000
+
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]

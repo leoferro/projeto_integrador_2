@@ -1,0 +1,73 @@
+.aluno-turma-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    width: 50%;
+    min-width: 500px;
+    height: 500px;
+}
+
+.aluno-turma-modal-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aluno-turma-modal-header h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.aluno-turma-modal-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+
+.aluno-turma-modal-aluno {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /*border: 1px solid #333;*/
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease-in-out;
+
+    background-color: #f0f0f0;
+}
+
+.aluno-turma-modal-aluno:hover {
+    background-color: #5a5858;
+    color: #fff;
+    cursor: pointer;
+}
+
+.aluno-turma-modal-aluno.selecionado {
+    background-color: #333;
+    color: #fff;
+}
+
+.aluno-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.aluno-info span {
+    color: #7a7a7a
+}
+
+.aluno-turma-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+}

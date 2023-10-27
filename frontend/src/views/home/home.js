@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import Navbar from '../../components/navbar/navbar'
-import Footer from '../../components/footer/footer'
 import './home.css'
 
 const Home = () => {

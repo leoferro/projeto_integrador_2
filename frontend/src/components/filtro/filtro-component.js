@@ -82,16 +82,27 @@ const FiltroComponente = ({ filtros, openModal }) => {
     label: "Dia da semana",
   };
 
+  const statusOptions = {
+    options: [
+      { label: "Selecione", value: "0" },
+      { label: "Ativo", value: "1" },
+      { label: "Inativo", value: "2" },
+    ],
+    label: "Status",
+  };
+
   return filtros ? (
     <div className="filtro-container">
       <h1>Filtros</h1>
       <div className="filtros">
         <div className="input-fields">
-          <InputField
-            placeholder="Pesquise"
-            className="input-container"
-            handler={filtros.pesquisa.handler}
-          />
+          {filtros.pesquisa && (
+            <InputField
+              placeholder="Pesquise"
+              className="input-container"
+              handler={filtros.pesquisa?.handler}
+            />
+          )}
           {filtros?.vencimento && (
             <DropdownMenu
               label={vencimentoOptions.label}
@@ -112,6 +123,13 @@ const FiltroComponente = ({ filtros, openModal }) => {
               label={diaSemanaOptions.label}
               options={diaSemanaOptions.options}
               handler={filtros.diaSemana.handler}
+            />
+          )}
+          {filtros.status && (
+            <DropdownMenu
+              label={statusOptions.label}
+              options={statusOptions.options}
+              handler={filtros.status.handler}
             />
           )}
         </div>

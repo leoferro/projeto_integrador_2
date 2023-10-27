@@ -110,13 +110,7 @@
   .pagamentos-dropdown-arrow {
     transition: 0.3s;
   }
-  .pagamentos-icon {
-    width: 18px;
-    height: 18px;
-    margin-top: auto;
-    transition: 0.3s;
-    margin-bottom: auto;
-  }
+  
   .pagamentos-dropdown-list {
     left: 0%;
     width: max-content;
@@ -357,13 +351,7 @@
   .pagamentos-dropdown-arrow1 {
     transition: 0.3s;
   }
-  .pagamentos-icon02 {
-    width: 18px;
-    height: 18px;
-    margin-top: auto;
-    transition: 0.3s;
-    margin-bottom: auto;
-  }
+
   .pagamentos-dropdown-list1 {
     left: 0%;
     width: max-content;

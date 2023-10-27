@@ -5,6 +5,7 @@ import PropTypes, { number, string } from "prop-types";
 
 import "./turma-cadastro-component.css";
 import { checkLoggedIn } from "../../utils/login";
+import { URL_API } from "../../config/app-config";
 
 const TurmaCadastroComponent = (props) => {
   const [disciplina, setDisciplina] = useState("");
@@ -54,7 +55,7 @@ const TurmaCadastroComponent = (props) => {
     // Perform form validation if needed
     const disciplinaRequest = await axios
       .post(
-        "http://localhost:8000/disciplina_search",
+        `${URL_API}/disciplina_search`,
         { nome: disciplina },
         { headers: { "Content-Type": "application/json" } }
       )
@@ -63,7 +64,7 @@ const TurmaCadastroComponent = (props) => {
         // Create Professor Disciplina Relationship
         const create_pdl = axios
           .post(
-            "http://localhost:8000/pdl",
+            `${URL_API}/pdl`,
             { professor_id: user.id, disciplina_id: response.data.id },
             { headers: { "Content-Type": "application/json" } }
           )
@@ -75,7 +76,7 @@ const TurmaCadastroComponent = (props) => {
         console.log("Create Disciplina", error)
         const response = axios
           .post(
-            "http://localhost:8000/disciplina",
+            `${URL_API}/disciplina`,
             { nome: disciplina, professor_id: user.id },
             { headers: { "Content-Type": "application/json" } }
           )
@@ -108,7 +109,7 @@ const TurmaCadastroComponent = (props) => {
     try {
       // Send the request to the backend using Axios
       // console.log(data)
-      const response = await axios.post("http://localhost:8000/turma", data, {
+      const response = await axios.post(`${URL_API}/turma`, data, {
         headers: { "Content-Type": "application/json" },
       });
 

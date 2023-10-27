@@ -67,9 +67,9 @@
 .teleport-show {
   display: flex !important;
 }
-.button-main {
+
+.button {
   gap: var(--dl-space-space-halfunit);
-  color: rgb(255, 255, 255);
   cursor: pointer;
   display: flex;
   font-style: normal;
@@ -77,18 +77,29 @@
   align-items: center;
   font-family: Inter;
   font-weight: 600;
-  padding-top: var(--dl-space-space-unit);
-  padding-left: var(--dl-space-space-oneandhalfunits);
   border-radius: 56px;
-  padding-right: var(--dl-space-space-oneandhalfunits);
   flex-direction: row;
-  padding-bottom: var(--dl-space-space-unit);
+  padding: var(--dl-space-space-unit) var(--dl-space-space-oneandhalfunits);
   justify-content: center;
+}
+
+.button-main {
+  color: rgb(255, 255, 255);
   background-color: rgb(36, 97, 255);
 }
 .button-main:hover {
   opacity: 0.75;
 }
+
+.button-secondary {
+  color: rgb(255, 255, 255);
+  background-color: rgb(243, 88, 88);
+}
+
+.button-secondary:hover {
+  opacity: 0.75;
+}
+
 .quick-links {
   gap: var(--dl-space-space-unit);
   width: 100%;

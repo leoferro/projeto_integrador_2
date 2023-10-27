@@ -1,7 +1,7 @@
 import AlunoCadastro from "./aluno-cadastro";
 
-const AlunoModal = () => {
-  return <AlunoCadastro />;
+const AlunoModal = ({ closeModal }) => {
+  return <AlunoCadastro closeModal={closeModal} />;
 };
 
 export default AlunoModal;

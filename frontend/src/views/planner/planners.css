@@ -12,8 +12,6 @@
   display: flex;
   position: relative;
   align-items: center;
-  border-color: var(--dl-color-gray-black);
-  border-width: 1px;
   flex-direction: column;
 }
 .planners-container-master {

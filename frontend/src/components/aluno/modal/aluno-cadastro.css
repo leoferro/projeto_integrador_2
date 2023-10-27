@@ -40,7 +40,9 @@
 }
 .cadastro2-container01 {
   display: flex;
+  flex-direction: column;
   position: relative;
+  align-items: center;
 }
 .cadastro2-form {
   width: 100%;
@@ -125,4 +127,9 @@
 }
 .cadastro2-text3 {
   margin-top: var(--dl-space-space-halfunit);
+}
+
+.buttons {
+  display: flex;
+  gap: 1em
 }

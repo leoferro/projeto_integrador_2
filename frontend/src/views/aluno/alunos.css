@@ -443,13 +443,10 @@
   flex-direction: column;
   justify-content: center;
 }
-.alunos-container26 {
-  width: 603px;
-  height: 100%;
+.alunos-list {
+  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: flex-start;
 }
 .alunos-container27 {
   width: 100%;

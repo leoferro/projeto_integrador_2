@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 import './cadastro.css'
-import CadastroForm from '../../components/cadastroForm'
+import CadastroForm from '../../components/auth/cadastro-form'
 
 const Cadastro = (props) => {
   return (

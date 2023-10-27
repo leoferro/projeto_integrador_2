@@ -6,6 +6,7 @@ import axios from 'axios'
 import './entrar.css'
 import { cacheLogIn, checkLoggedIn } from '../../utils/login'
 import Footer from '../../components/footer/footer'
+import { URL_API } from '../../config/app-config'
 
 const Entrar = (props) => {
 
@@ -29,7 +30,7 @@ const Entrar = (props) => {
       senha: senha
     }
 
-    axios.post('http://localhost:8000/professor/auth', body, {
+    axios.post(`${URL_API}/professor/auth`, body, {
       headers: {
         "Content-Type": "application/json"
       }

@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-
-import NavigationLinks from "../../components/navigation/navigation-links";
-import TurmaModal from "../../components/turma/modal/turma-modal";
+import { checkLoggedIn } from "../../utils/login";
+import { TurmaCard, TurmaFiltro, TurmaModal, FiltroComponente } from "../../components/turma";
 import Modal from "react-modal";
-import "./turmas.css";
-
-import { cacheLogOut, checkLoggedIn } from "../../utils/login";
-import TurmaFiltro from "./turma-filtro";
 import axios from "axios";
-import { TurmaCard } from "../../components/turma";
 import Header from "../../components/header/header";
-import FiltroComponente from "../../components/filtro/filtro-component";
+import "./turmas.css";
+import { URL_API } from "../../config/app-config";
 
 const Turmas = () => {
   //const history = useHistory()
@@ -44,7 +39,7 @@ const Turmas = () => {
   };
 
   const loadTurmas = async () => {
-    const url = "http://localhost:8000/turma";
+    const url = `${URL_API}/turma`;
 
     const dados = {
       skip: 0,
@@ -102,7 +97,7 @@ const Turmas = () => {
     },
     pesquisa: {
       handler: (value) => {
-        console.log("USANDO HANDLER")
+        console.log("USANDO HANDLER");
         setTurmasFiltro({
           ...turmasFiltro,
           txtPesquisa: value,
@@ -154,7 +149,6 @@ const Turmas = () => {
           <TurmaModal />
         </Modal>
       </div>
-      <Header />
       <section className="turmas-hero">
         <h1>Minhas turmas</h1>
         <div className="turmas-container-master">
@@ -204,10 +198,10 @@ const Turmas = () => {
                   }
 
                   return (
-                    checaFiltro(filtroDiaSemana) 
-                    && checaFiltro(filtroQtdAluno)
-                    && checaFiltro(filtroVencimento)
-                    && checaFiltro(filtroPesquisa)
+                    checaFiltro(filtroDiaSemana) &&
+                    checaFiltro(filtroQtdAluno) &&
+                    checaFiltro(filtroVencimento) &&
+                    checaFiltro(filtroPesquisa)
                   );
                 })
                 .map((turma) => {

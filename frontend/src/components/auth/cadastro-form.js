@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { cacheLogIn } from "../utils/login";
+import { cacheLogIn } from "../../utils/login";
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-import "./cadastro01.css";
+import "./cadastro-form.css";
 
 const CadastroForm = (props) => {
   const [nome, setNome] = useState("");
@@ -26,9 +26,8 @@ const CadastroForm = (props) => {
       senha: senha,
     };
 
-    // Send the request to the backend using Axios
     axios
-      .post("http://localhost:8000/professor", data, {
+      .post(`${URL_API}/professor`, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {

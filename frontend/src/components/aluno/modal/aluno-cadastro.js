@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./aluno-cadastro.css";
 import axios from "axios";
+import { URL_API } from "../../../config/app-config";
 
-const AlunoCadastro = () => {
+const AlunoCadastro = ({ closeModal }) => {
   const [nome, setNome] = useState("");
   const [dataNasc, setDataNasc] = useState("");
   const [email, setEmail] = useState("");
@@ -14,26 +15,31 @@ const AlunoCadastro = () => {
     event.preventDefault();
     console.log({ nome, dataNasc, email, telefone, ativo });
 
-    const url = "http://localhost:8000/aluno";
+    const url = `${URL_API}/aluno`;
 
     const dados = {
-      nome,
+      nome: nome,
+      email: email,
+      telefone: telefone,
       data_nascimento: dataNasc,
-      email,
-      telefone,
-      ativo,
+      ativo: ativo,
+      status_pagamento: false,
+      turma_id: 0,
     };
 
     try {
       const response = await axios.post(url, dados, {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
       });
-  
+
       if (!response) {
         alert("Erro ao cadastrar aluno");
         return;
       }
-  
+
       alert("Aluno cadastrado com sucesso");
     } catch (error) {
       console.error("Error:", error);
@@ -138,12 +144,21 @@ const AlunoCadastro = () => {
                   </label>
                 </div>
               </div>
-              <button name="signup" type="submit" className="button">
-                <span className="button button-main">
-                  <span>Cadastrar</span>
-                  <br></br>
-                </span>
-              </button>
+              <div className="buttons">
+                <button
+                  name="signup"
+                  type="submit"
+                  className="button button-main"
+                >
+                  Cadastrar
+                </button>
+                <button
+                  className="button button-secondary"
+                  onClick={closeModal}
+                >
+                  Cancelar
+                </button>
+              </div>
             </form>
           </div>
         </div>

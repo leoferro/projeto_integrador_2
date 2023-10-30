@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from sqlmodel import Session
 from datetime import date, datetime
 
-from ..models import Aluno, Turma, engine
+from ..models import Aluno, Turma, engine, ProfessorAlunoLink
 from .aluno_turma_link import ATLCreate, ATLUpdate, create_atl, delete_atl
 from .professor_aluno_link import PALCreate, PALBase, create_pal, delete_pal
 from .pagamento import delete_pagamento
@@ -73,6 +73,18 @@ def read_aluno(aluno_id : int):
 def read_alunos(skip: int = 0, limit: int = 100):
     with Session(engine) as session:
         alunos = session.query(Aluno).offset(skip).limit(limit).all()
+        return alunos
+
+@router.get("/aluno/p/{professor_id}", response_model=list[AlunoRead])
+def read_alunos_prof(professor_id : int):
+    with Session(engine) as session:
+
+        links = session.query(ProfessorAlunoLink).filter(ProfessorAlunoLink.professor_id == professor_id).all()
+
+        aluno_ids = [link.aluno_id for link in links]
+
+        alunos = session.query(Aluno).filter(Aluno.id.in_(aluno_ids)).all()
+
         return alunos
 
 @router.put("/aluno/{aluno_id}", response_model=AlunoRead)

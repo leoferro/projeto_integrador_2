@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./aluno-cadastro.css";
 import axios from "axios";
 import { URL_API } from "../../../config/app-config";
 
-const AlunoCadastro = ({ closeModal }) => {
+const AlunoCadastro = ({ closeModal, user, editAluno }) => {
   const [nome, setNome] = useState("");
   const [dataNasc, setDataNasc] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
   const [ativo, setAtivo] = useState(false);
+  const [turmas, setTurmas] = useState({
+    lista: [],
+    idSelecionado: 0,
+  })
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ nome, dataNasc, email, telefone, ativo });
+    if(!turmas.idSelecionado && !editAluno) {
+      alert("Selecione uma turma");
+      return;
+    }
 
-    const url = `${URL_API}/aluno`;
+    const url = !editAluno ? `${URL_API}/aluno` : `${URL_API}/aluno/${editAluno.id}`;
 
     const dados = {
       nome: nome,
@@ -24,28 +31,74 @@ const AlunoCadastro = ({ closeModal }) => {
       data_nascimento: dataNasc,
       ativo: ativo,
       status_pagamento: false,
-      turma_id: 0,
     };
 
+    if(!editAluno)
+      dados.turma_id = turmas.idSelecionado;
+
     try {
-      const response = await axios.post(url, dados, {
+      const response = editAluno ? await axios.put(url, dados, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }) : await axios.post(url, dados, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
       });
 
+      const textoResposta = editAluno ? "atualizado" : "cadastrado";
+      const textoErro = editAluno ? "atualizar" : "cadastrar";
+
       if (!response) {
-        alert("Erro ao cadastrar aluno");
+        alert(`Erro ao ${textoErro} aluno`);
         return;
       }
 
-      alert("Aluno cadastrado com sucesso");
+      alert(`Aluno ${textoResposta} com sucesso`);
+      closeModal();
     } catch (error) {
-      console.error("Error:", error);
-      alert("Erro ao cadastrar aluno");
+      alert(`Erro ao ${textoErro} aluno`);
     }
   };
+
+  const loadTurmas = async () => {
+    const url = `${URL_API}/turma`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response) {
+        alert("Erro ao carregar turmas");
+        return;
+      }
+      setTurmas({
+        ...turmas,
+        lista: response.data.filter((t) => t.professor_id == user.id),
+      });
+    } catch (error) {
+      alert("Erro ao carregar turmas");
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      loadTurmas();
+
+      console.log("RECEBI O ALUNO!!!", editAluno)
+      if(editAluno) {
+        setNome(editAluno.nome);
+        setDataNasc(editAluno.data_nascimento);
+        setEmail(editAluno.email);
+        setTelefone(editAluno.telefone);
+        setAtivo(editAluno.ativo);
+      }
+    }
+  }, [user, editAluno]);
 
   return (
     <div data-modal="practices" className={`cadastro2-cadastro`}>
@@ -54,7 +107,7 @@ const AlunoCadastro = ({ closeModal }) => {
           <div className="cadastro2-container01">
             <form className="cadastro2-form" onSubmit={handleSubmit}>
               <div className="cadastro2-container02">
-                <h1>Novo aluno</h1>
+                {!editAluno ? <h1>Novo aluno</h1> : <h1>Editar aluno</h1>}
               </div>
               <div className="cadastro2-container03">
                 <label htmlFor="nome" className="cadastro2-text1">
@@ -115,6 +168,26 @@ const AlunoCadastro = ({ closeModal }) => {
                   onChange={(event) => setTelefone(event.target.value)}
                 />
               </div>
+              {!editAluno && (
+                <div className="cadastro-turma">
+                <label htmlFor="turma" className="cadastro2-text1">
+                  Turma
+                </label>
+                <select
+                  id="turma"
+                  required
+                  autoFocus
+                  className="enter-text input"
+                  value={turmas.idSelecionado}
+                  onChange={(event) => setTurmas({ ...turmas, idSelecionado: event.target.value })}
+                >
+                  <option value={0}>Selecione uma turma</option>
+                  {turmas.lista.map((turma) => (
+                    <option value={turma.id}>{turma.disciplina}</option>
+                  ))}
+                </select>
+              </div>
+              )}
               <span>Ativo?</span>
               <div className="cadastro2-container07">
                 <div className="cadastro2-container08">
@@ -150,7 +223,7 @@ const AlunoCadastro = ({ closeModal }) => {
                   type="submit"
                   className="button button-main"
                 >
-                  Cadastrar
+                  {!editAluno ? 'Cadastrar' : 'Salvar'}
                 </button>
                 <button
                   className="button button-secondary"

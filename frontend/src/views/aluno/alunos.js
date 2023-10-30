@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { checkLoggedIn } from "../../utils/login";
-import AlunoModal from "../../components/aluno/modal/aluno-modal";
-import { AlunoCard, AlunosFiltro } from "../../components/aluno";
-import Modal from "react-modal";
-import Header from "../../components/header/header";
-import "./alunos.css";
-import axios from "axios";
+import { AlunoCard, AlunoModal } from "../../components/aluno";
 import { URL_API } from "../../config/app-config";
 import FiltroComponente from "../../components/filtro/filtro-component";
+import Modal from "react-modal";
+import "./alunos.css";
+import axios from "axios";
 
 const Alunos = (props) => {
   const history = useHistory();
   const [user, setUser] = useState();
-  const [modalOpen, setIsOpen] = useState(false);
+  const [modalOpen, setIsOpen] = useState({
+    open: false,
+    aluno: null,
+  });
   const [alunos, setAlunos] = useState([]);
   const [alunosFiltro, setAlunosFiltros] = useState({
     txtPesquisa: "",
@@ -36,31 +37,28 @@ const Alunos = (props) => {
   };
 
   const closeModal = () => {
-    setIsOpen(false);
+    setIsOpen({
+      open: false,
+      aluno: null,
+    });
   };
 
   const loadAlunos = async () => {
-    const url = `${URL_API}/aluno`;
-
-    const dados = {
-      skip: 0,
-      limit: 100,
-    };
+    const url = `${URL_API}/aluno/p/${user.id}`;
 
     try {
-      const response = await axios.get(url, dados, {
+      const alunosResponse = await axios.get(url, {
         headers: { "Content-Type": "application/json" },
       });
 
-      if (!response) {
+      if (!alunosResponse) {
         alert("Erro ao carregar alunos");
         return;
       }
-      console.log("SETANDO ALUNOS => ", response.data);
-      setAlunos(response.data);
+      setAlunos(alunosResponse.data);
     } catch (error) {
-      console.error("Error:", error);
       alert("Erro ao carregar alunos");
+      console.log(error)
     }
   };
 
@@ -83,6 +81,13 @@ const Alunos = (props) => {
     }
   }, [user]);
 
+  const editEvent = (aluno) => {
+    setIsOpen({
+      open: true,
+      aluno: aluno,
+    });
+  };
+
   return (
     <div className="alunos-container">
       <Helmet>
@@ -90,7 +95,7 @@ const Alunos = (props) => {
         <meta property="og:title" content="Alunos - Classtool" />
       </Helmet>
       <Modal
-        isOpen={modalOpen}
+        isOpen={modalOpen.open}
         onRequestClose={closeModal}
         onAfterOpen={() => {
           setNavBarStyle("alunos-navbar-open");
@@ -122,7 +127,7 @@ const Alunos = (props) => {
           },
         }}
       >
-        <AlunoModal closeModal={closeModal} />
+        <AlunoModal closeModal={closeModal} user={user} editAluno={modalOpen.aluno} />
       </Modal>
       <section className="alunos-hero">
         <div className="alunos-container27">
@@ -162,7 +167,9 @@ const Alunos = (props) => {
                 );
               })
               .map((aluno, key) => {
-                return <AlunoCard aluno={aluno} key={key} />;
+                return <AlunoCard aluno={aluno} key={key} editEvent={() => {
+                  editEvent(aluno);
+                }} />;
               })}
           </div>
         </div>

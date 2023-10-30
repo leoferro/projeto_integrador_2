@@ -66,8 +66,6 @@ const FiltroComponente = ({ filtros, openModal }) => {
     label: "Vencimento",
   };
 
-  console.log(vencimentoOptions);
-
   const diaSemanaOptions = {
     options: [
       { label: "Selecione", value: "0" },

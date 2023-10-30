@@ -8,11 +8,10 @@ import './navigation-links.css'
 const NavigationLinks = (props) => {
   return (
     <nav className={`navigation-links-nav ${props.rootClassName} `}>
-      <Link to="/perfil"className="navigation-links-text">{props.text}</Link>
-      <Link to="/planners" className="navigation-links-text">{props.text1}</Link>
-      <Link to="/pagamentos" className="navigation-links-text">{props.text2}</Link>
-      <Link to="/turmas" className="navigation-links-text">{props.text3}</Link>
-      <Link to="/alunos" className="navigation-links-text">{props.text4}</Link>
+      <Link to="/planners"className="navigation-links-text">{props.text}</Link>
+      <Link to="/pagamentos" className="navigation-links-text">{props.text1}</Link>
+      <Link to="/turmas" className="navigation-links-text">{props.text2}</Link>
+      <Link to="/alunos" className="navigation-links-text">{props.text3}</Link>
     </nav>
   )
 }

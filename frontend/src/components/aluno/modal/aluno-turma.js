@@ -4,13 +4,15 @@ import "./aluno-turma.css";
 import { URL_API } from "../../../config/app-config";
 import axios from "axios";
 import Loading from "../../loading/loading";
+import { exibeDataInternacional } from "../../../utils/funcoes_gerais";
+import { checkLoggedIn } from "../../../utils/login";
 
 const AlunoTurmaModal = ({ turma, closeModal }) => {
   const [alunoSelecionado, setAlunoSelecionado] = useState(null);
   const [alunos, setAlunos] = useState([]);
 
-  const loadAlunos = async () => {
-    const url = `${URL_API}/aluno`;
+  const loadAlunos = async (userId) => {
+    const url = `${URL_API}/aluno/p/${userId}`;
 
     const dados = {
       skip: 0,
@@ -35,18 +37,26 @@ const AlunoTurmaModal = ({ turma, closeModal }) => {
   };
 
   const addAlunoTurma = async () => {
-    const url = `${URL_API}/turma/${turma.id}`;
+    // const url = `${URL_API}/turma/${turma.id}`;
+    // const data = {
+    //   ...turma,
+    //   alunos: [...turma.alunos, alunoSelecionado],
+    // };
+    // console.log("data: ", data);
+
+    const url = `${URL_API}/atl`; // aluno-turma-link
+
     const data = {
-      ...turma,
-      alunos: [...turma.alunos, alunoSelecionado],
+      data_inicio: exibeDataInternacional(new Date()),
+      turma_id: turma.id,
+      aluno_id: alunoSelecionado.id,
     };
-    console.log("data: ", data);
+
     try {
-      const response = await axios.put(url, data, {
+      const response = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
           "Allow-Cross-Origin": "*",
-          "Access-Control-Allow-Origin": "*",
         },
       });
 
@@ -55,6 +65,7 @@ const AlunoTurmaModal = ({ turma, closeModal }) => {
         return;
       }
       alert("Aluno adicionado com sucesso");
+      console.log(response);
     } catch (error) {
       console.error("Error:", error);
       alert("Erro ao adicionar aluno");
@@ -62,7 +73,8 @@ const AlunoTurmaModal = ({ turma, closeModal }) => {
   };
 
   useEffect(() => {
-    loadAlunos();
+    var user = checkLoggedIn();
+    loadAlunos(user.id);
   }, []);
 
   return turma ? (

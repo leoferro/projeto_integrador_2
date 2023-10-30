@@ -81,9 +81,12 @@ const TurmaDetalhes = () => {
                   </button>
                 </div>
                 {turma.alunos.length ? (
-                  <ul>
+                  <ul className="lista-alunos">
                     {turma.alunos.map((aluno) => (
-                      <li key={aluno.id}>{aluno.nome}</li>
+                      <li key={aluno.id}>
+                        {aluno.nome}
+                        <a href={`mailto:${aluno.email}`} className="aluno-email">{aluno.email}</a>
+                        </li>
                     ))}
                   </ul>
                 ) : (

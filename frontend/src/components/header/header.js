@@ -26,11 +26,10 @@ const Header = () => {
         </Link>
         {!notShowRoutes.includes(route) ? (
           <NavigationLinks
-            text="Perfil"
-            text1="Planners"
-            text2="Pagamentos"
-            text3="Turmas"
-            text4="Alunos"
+            text="Planner"
+            text1="Pagamentos"
+            text2="Turmas"
+            text3="Alunos"
             rootClassName="rootClassName14"
           />
         ) : (

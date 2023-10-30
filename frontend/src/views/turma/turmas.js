@@ -21,6 +21,7 @@ const Turmas = () => {
     vencimento: null,
     txtPesquisa: null,
   });
+  const [editTurma, setEditTurma] = useState(null);
 
   useEffect(() => {
     setUser(checkLoggedIn());
@@ -56,10 +57,8 @@ const Turmas = () => {
         alert("Erro ao carregar turmas");
         return;
       }
-      console.log("SETANDO TURMAS => ", response.data);
-      setTurmas(response.data);
+      setTurmas(response.data.filter(t => t.professor_id == user.id));
     } catch (error) {
-      console.error("Error:", error);
       alert("Erro ao carregar turmas");
     }
   };
@@ -146,7 +145,7 @@ const Turmas = () => {
             },
           }}
         >
-          <TurmaModal />
+          <TurmaModal editTurma={editTurma} />
         </Modal>
       </div>
       <section className="turmas-hero">

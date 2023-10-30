@@ -28,3 +28,14 @@ export const exibeDiaSemana = (diaSemana) => {
 
     return dias[diaSemana];
 }
+
+export const exibeDataInternacional = (data) => {
+    // retorna 2023-10-30
+    if (data) {
+        // data vem em formato Date
+        const dia = data.getDate();
+        const mes = data.getMonth() + 1;
+        const ano = data.getFullYear();
+        return `${ano}-${mes}-${dia}`;
+    }
+}

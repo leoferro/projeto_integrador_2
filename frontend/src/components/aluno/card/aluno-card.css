@@ -1,6 +1,7 @@
 .aluno-card {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-height: 100px;
     padding: 10px;
     border-radius: 10px;
@@ -16,6 +17,12 @@
 .main-info {
     display: flex;
     flex-direction: column;
+}
+
+.main-info div {
+    display: flex;
+    align-items: center;
+    gap: .5em
 }
 
 .main-info p {
@@ -43,4 +50,13 @@
 
 .txt-ativo {
     color: rgb(55, 236, 94);
+}
+
+.btn-editar {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-editar:hover {
+    transform: scale(1.1);
 }

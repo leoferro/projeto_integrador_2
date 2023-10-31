@@ -25,6 +25,7 @@ class AlunoTurmaLink(SQLModel, table=True):
 class Pagamento(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     data_pagamento: date
+    valor: float
 
     aluno_id: int | None = Field(default=None, foreign_key="aluno.id")
     aluno: "Aluno" = Relationship(back_populates="pagamentos")

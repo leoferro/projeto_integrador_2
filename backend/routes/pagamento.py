@@ -8,6 +8,7 @@ router = APIRouter()
 
 class PagamentoBase(BaseModel):
     data_pagamento: date
+    valor: float
     aluno_id: int
 
 class PagamentoCreate(PagamentoBase):
@@ -22,6 +23,7 @@ class PagamentoRead(PagamentoBase):
 class PagamentoUpdate(PagamentoBase):
     data_pagamento: date | None
     aluno_id : int | None
+    valor: float | None
     
 @router.post("/pagamento", response_model=PagamentoRead)
 def create_pagamento(pagamento: PagamentoCreate):

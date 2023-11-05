@@ -35,8 +35,11 @@ const Turmas = () => {
     setIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (reload) => {
     setIsOpen(false);
+    if(reload) {
+      loadTurmas();
+    }
   };
 
   const loadTurmas = async () => {
@@ -96,7 +99,6 @@ const Turmas = () => {
     },
     pesquisa: {
       handler: (value) => {
-        console.log("USANDO HANDLER");
         setTurmasFiltro({
           ...turmasFiltro,
           txtPesquisa: value,
@@ -115,12 +117,6 @@ const Turmas = () => {
         <Modal
           isOpen={modalOpen}
           onRequestClose={closeModal}
-          onAfterOpen={() => {
-            setNavBarStyle("turmas-navbar-open");
-          }}
-          onAfterClose={() => {
-            setNavBarStyle("turmas-navbar");
-          }}
           style={{
             content: {
               top: "0px",
@@ -138,14 +134,13 @@ const Turmas = () => {
               alignItems: "center",
               justifyContent: "center",
               boxShadow: "0px 0px 25px -2px rgba(66, 68, 90, 0.4)",
-              backgroundColor: "#ffffff",
             },
             overlay: {
               backdropFilter: "blur(4px)",
             },
           }}
         >
-          <TurmaModal editTurma={editTurma} />
+          <TurmaModal editTurma={editTurma} closeModal={closeModal} />
         </Modal>
       </div>
       <section className="turmas-hero">
@@ -207,7 +202,7 @@ const Turmas = () => {
                   return (
                     <Link
                       to={`/turma/${turma.id}`}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", height: "fit-content" }}
                     >
                       <TurmaCard key={turma.id} turma={turma} />
                     </Link>

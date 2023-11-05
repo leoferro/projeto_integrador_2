@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { cacheLogIn } from "../../utils/login";
+import { URL_API } from "../../config/app-config";
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -31,7 +32,6 @@ const CadastroForm = (props) => {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data != null) {
           cacheLogIn(response.data);
           alert("Usuário cadastrado com sucesso!");
@@ -109,8 +109,8 @@ const CadastroForm = (props) => {
             onInput={(e) => e.target.setCustomValidity("")}
             placeholder={props.textinput_placeholder2}
             className="cadastro01-textinput2 input"
-            autocomplete="new-password"
-            minlength="6"
+            autoComplete="new-password"
+            minLength="6"
             pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{6,}$"
             required
           />

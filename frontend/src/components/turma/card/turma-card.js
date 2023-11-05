@@ -5,8 +5,6 @@ import { useHistory } from "react-router-dom";
 const TurmaCard = ({ turma }) => {
   const history = useHistory();
 
-  console.log("turma: ", turma)
-
   const handleClick = () => {
     history.push(`/turma/${turma.id}`);
   };

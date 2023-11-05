@@ -1,7 +1,7 @@
 .planners-container {
   width: 100%;
   display: flex;
-  overflow: hidden;;
+  overflow: hidden;
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
@@ -274,7 +274,39 @@
   color: rgb(255, 255, 255);
   font-size: 12px;
 }
-@media(max-width: 991px) {
+
+.planners-legenda {
+  display: flex;
+  width: 100%;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.planners-legenda .legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.legenda-item .legenda-item-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legenda-item-color.legenda-pagamento {
+  background-color: green;
+}
+
+.legenda-item-color.legenda-aula {
+  background-color: blue;
+}
+
+.legenda-item-color.legenda-vencimento {
+  background-color: red;
+}
+
+@media (max-width: 991px) {
   .planners-hero {
     flex: 1;
     height: 0px;
@@ -292,7 +324,7 @@
     display: flex;
     padding: var(--dl-space-space-unit);
     border-radius: var(--dl-radius-radius-round);
-    background-color: #2461FF;
+    background-color: #2461ff;
   }
   .planners-icon {
     fill: white;
@@ -318,7 +350,7 @@
     gap: var(--dl-space-space-oneandhalfunits);
   }
 }
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .planners-navbar {
     padding-left: var(--dl-space-space-oneandhalfunits);
     padding-right: var(--dl-space-space-oneandhalfunits);
@@ -356,7 +388,7 @@
     line-height: 18px;
   }
 }
-@media(max-width: 479px) {
+@media (max-width: 479px) {
   .planners-navbar {
     padding: var(--dl-space-space-unit);
   }

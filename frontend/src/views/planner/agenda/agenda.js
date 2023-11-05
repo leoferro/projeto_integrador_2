@@ -26,7 +26,7 @@ const Agenda = ({ eventos }) => {
   // os eventos podem ser turmas (aulas) ou pagamentos
 
   // turmas virao com horario_inicial, horario_final, dia_semana
-  // pagamentos virao com data
+  // pagamentos virao com data_pagamento
 
   useEffect(() => {
     const eventosFormatados = [];
@@ -64,11 +64,25 @@ const Agenda = ({ eventos }) => {
           eventosFormatados.push(novoEvento);
           initialDate = initialDate.add(1, "week");
         }
-      } else if (evento.data) {
-        const data = moment(evento.data);
+
+        // aqui também vamos inserir o vencimento de pagamento da turma
+        // nós temos apenas o dia do vencimento, então vamos adicionar só no mês atual
+        const dataVencimento = moment().date(evento.vencimento);
+        const eventoVencimento = {
+          title: `${evento.disciplina} - Vencimento`,
+          start: dataVencimento.toDate(),
+          end: dataVencimento.toDate(),
+          allDay: true,
+          color: 'red'
+        };
+
+        eventosFormatados.push(eventoVencimento);
+
+      } else if (evento.data_pagamento) {
+        const data = moment(evento.data_pagamento, "YYYY-MM-DD");
 
         const eventoFormatado = {
-          title: `Pagamento ${evento.aluno.nome}`,
+          title: `${alunoTurmaPagamento(evento.aluno_id)} (${turmaPagamento(evento.aluno_id)})`,
           start: data.toDate(),
           end: data.toDate(),
           allDay: true,
@@ -77,10 +91,20 @@ const Agenda = ({ eventos }) => {
 
         eventosFormatados.push(eventoFormatado);
       }
-      console.log("EVENTS => ", eventosFormatados);
       setEvents(eventosFormatados);
     });
   }, [eventos]);
+
+  const alunoTurmaPagamento = (aluno_id) => {
+    const turma = eventos.find((t) => t.alunos && t.alunos.find((a) => a.id === aluno_id));
+    const aluno = turma.alunos.find((a) => a.id === aluno_id);
+    return aluno.nome.split(" ")[0];
+  }
+
+  const turmaPagamento = (aluno_id) => {
+    const turma = eventos.find((t) => t.alunos && t.alunos.find((a) => a.id === aluno_id));
+    return turma.disciplina;
+  }
 
   return (
     <div className="agenda">

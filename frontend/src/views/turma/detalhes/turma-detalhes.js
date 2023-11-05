@@ -28,12 +28,32 @@ const TurmaDetalhes = () => {
 
       if (response) {
         setTurma(response.data);
-        console.log(response.data);
       }
     } catch (error) {
-      console.log(error);
     }
   };
+
+  const deleteTurma = async () => {
+    const confirm = window.confirm("Deseja realmente excluir a turma?");
+    if (confirm) {
+      const url = `${URL_API}/turma/${id}`;
+      try {
+        const response = await axios.delete(url, {
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+
+        if (response) {
+          alert("Turma excluída com sucesso");
+          window.location.href = "/turmas";
+        }
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+  }
 
   useEffect(() => {
     if (!turma) {
@@ -73,12 +93,12 @@ const TurmaDetalhes = () => {
               <div className="turma-alunos">
                 <div className="turma-alunos-header">
                   <h3>Alunos</h3>
-                  <button
+                  {/* <button
                     className="button button-main"
                     onClick={() => setShowAlunoModal(true)}
                   >
                     Adicionar
-                  </button>
+                  </button> */}
                 </div>
                 {turma.alunos.length ? (
                   <ul className="lista-alunos">
@@ -93,6 +113,14 @@ const TurmaDetalhes = () => {
                   <p>Nenhum aluno matriculado</p>
                 )}
               </div>
+            </div>
+            <div className="turma-actions">
+              <button
+                className="button button-danger"
+                onClick={deleteTurma}
+              >
+                Excluir turma
+              </button>
             </div>
           </>
         ) : (

@@ -46,14 +46,14 @@ const Planners = (props) => {
   };
 
   const loadEventos = async () => {
-    const turmas = await loadTurmas();
-    const pagamentos = await loadPagamentos();
+    try {
+      const turmas = await loadTurmas();
+      const pagamentos = await loadPagamentos();
 
-    console.log(turmas);
-
-    console.log(pagamentos)
-
-    setEventos([...turmas, ...pagamentos]);
+      setEventos([...turmas, ...pagamentos]);
+    } catch (error) {
+      alert("Não foi possível carregar o planner.");
+    }
   };
 
   useEffect(() => {
@@ -70,6 +70,20 @@ const Planners = (props) => {
         <div className="planners-container-master">
           <h1>Meu Planner</h1>
           {eventos && <Agenda eventos={eventos} />}
+          <div className="planners-legenda">
+            <div className="legenda-item">
+              <div className="legenda-item-color legenda-pagamento"></div>
+              <p>Pagamento</p>
+            </div>
+            <div className="legenda-item">
+              <div className="legenda-item-color legenda-aula"></div>
+              <p>Aula</p>
+            </div>
+            <div className="legenda-item">
+              <div className="legenda-item-color legenda-vencimento"></div>
+              <p>Vencimento</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>

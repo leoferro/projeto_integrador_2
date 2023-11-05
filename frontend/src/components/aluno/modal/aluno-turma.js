@@ -28,22 +28,15 @@ const AlunoTurmaModal = ({ turma, closeModal }) => {
         alert("Erro ao carregar alunos");
         return;
       }
-      console.log("SETANDO ALUNOS => ", response.data);
+
       setAlunos(response.data);
     } catch (error) {
-      console.error("Error:", error);
+
       alert("Erro ao carregar alunos");
     }
   };
 
   const addAlunoTurma = async () => {
-    // const url = `${URL_API}/turma/${turma.id}`;
-    // const data = {
-    //   ...turma,
-    //   alunos: [...turma.alunos, alunoSelecionado],
-    // };
-    // console.log("data: ", data);
-
     const url = `${URL_API}/atl`; // aluno-turma-link
 
     const data = {
@@ -65,7 +58,7 @@ const AlunoTurmaModal = ({ turma, closeModal }) => {
         return;
       }
       alert("Aluno adicionado com sucesso");
-      console.log(response);
+
     } catch (error) {
       console.error("Error:", error);
       alert("Erro ao adicionar aluno");

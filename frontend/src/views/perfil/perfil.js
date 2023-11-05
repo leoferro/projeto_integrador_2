@@ -17,7 +17,6 @@ const Perfil = (props) => {
     setUser(checkLoggedIn())
 
     if(checkLoggedIn() == undefined){
-      // console.log(user)
       history.push("/")
     }
 

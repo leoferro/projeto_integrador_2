@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./pagamento-stats.css";
 
-const PagamentoStats = ({ turmas, pagamentos }) => {
+const PagamentoStats = ({ pagamentos, turmas, pendentes }) => {
   const [data, setData] = useState({});
   // nós vamos receber turmas e dividir para os seguintes dados:
   // alunos, turmas, total arrecadado, total a receber
@@ -14,8 +14,8 @@ const PagamentoStats = ({ turmas, pagamentos }) => {
       return acc + turma.alunos.length;
     }, 0);
 
-    const totalAReceber = turmas.reduce((acc, turma) => {
-      return acc + turma.alunos.length * turma.mensalidade;
+    const totalAReceber = pendentes.reduce((acc, pendente) => {
+      return acc + pendente.valor;
     }, 0);
 
     const totalArrecadado = pagamentos.reduce((acc, pagamento) => {
@@ -27,7 +27,6 @@ const PagamentoStats = ({ turmas, pagamentos }) => {
       totalArrecadado,
       totalAReceber,
     });
-    console.log("Turmas =>", turmas)
   }, [turmas, pagamentos]);
 
   return turmas ? (
@@ -55,7 +54,7 @@ const PagamentoStats = ({ turmas, pagamentos }) => {
         </svg>
         <span className="stat-title">Total</span>
         <span className="stat-subtitle">Arrecadado</span>
-        <h1 className="stat-value">R${data.totalAReceber || 0}</h1>
+        <h1 className="stat-value">R${data.totalArrecadado || 0}</h1>
       </div>
       <div className="stat">
         <svg viewBox="0 0 1024 1024" className="stat-icon">

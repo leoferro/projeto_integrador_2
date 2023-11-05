@@ -27,20 +27,27 @@ const Alunos = (props) => {
     setUser(checkLoggedIn());
 
     if (checkLoggedIn() == undefined) {
-      // console.log(user)
       history.push("/");
     }
   }, []);
 
   const openModal = () => {
-    setIsOpen(true);
+    setIsOpen({
+      open: true,
+      aluno: null,
+    });
   };
 
-  const closeModal = () => {
+  const closeModal = (reload) => {
     setIsOpen({
       open: false,
       aluno: null,
     });
+
+    if (reload) {
+      loadAlunos();
+    }
+    
   };
 
   const loadAlunos = async () => {

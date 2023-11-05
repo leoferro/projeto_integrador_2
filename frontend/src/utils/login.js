@@ -5,7 +5,6 @@ const cacheLogIn = data => {
 
 const checkLoggedIn = () => {
     const loggedInUser = localStorage.getItem('user')
-    // console.log(`Logged: ${loggedInUser}`)
     if (loggedInUser) {
         return JSON.parse(loggedInUser)
     }

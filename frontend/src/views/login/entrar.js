@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Link,  useHistory } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import axios from 'axios'
 
 import './entrar.css'
 import { cacheLogIn, checkLoggedIn } from '../../utils/login'
-import Footer from '../../components/footer/footer'
 import { URL_API } from '../../config/app-config'
 
 const Entrar = (props) => {

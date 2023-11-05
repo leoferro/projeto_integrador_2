@@ -1,34 +1,86 @@
 import React, { useState } from "react";
 
 import axios from "axios";
-import PropTypes, { number, string } from "prop-types";
+import InputMask from "react-input-mask";
 
 import "./turma-cadastro-component.css";
 import { checkLoggedIn } from "../../utils/login";
 import { URL_API } from "../../config/app-config";
 
-const TurmaCadastroComponent = (props) => {
+const TurmaCadastroComponent = ({ rootClassName, closeModal }) => {
   const [disciplina, setDisciplina] = useState("");
-  const [horaInicioAula, setHoraInicioAula] = useState("00");
-  const [horaFimAula, setHoraFimAula] = useState("00");
-  const [minutoInicioAula, setMinutoInicioAula] = useState("00");
-  const [minutoFimAula, setMinutoFimAula] = useState("00");
+  const [horarioInicio, setHorarioInicio] = useState({
+    hora: "00",
+    minuto: "00",
+  });
+  const [horarioFim, setHorarioFim] = useState({
+    hora: "00",
+    minuto: "00",
+  });
   const [valorHoraAula, setValorHoraAula] = useState(0);
   const [diaVencimento, setDiaVencimento] = useState(1);
   const [diaDaSemana, setDiaDaSemana] = useState(1);
 
   const user = checkLoggedIn();
 
-  const updateMinuto = (event, setFunc) => {
-    const regex = /^[0-5][0-9]$/;
-    if (regex.test(event.target.value.slice(0, 2).padStart(2, "0")))
-      setFunc(event.target.value.slice(0, 2).padStart(2, 0));
+  const updateHora = (value, setHora) => {
+    try {
+      // se houver letras, remove
+      if (isNaN(value)) {
+        value = value.replace(/\D/g, "");
+      }
+      var hora = value;
+      switch (value.length) {
+        case 1:
+          hora = "0" + value;
+          setHora(hora);
+          break;
+        case 2:
+          setHora(hora);
+          break;
+        default:
+          hora = value.substring(1);
+          setHora(hora);
+          break;
+      }
+      if(Number(hora) > 23) {
+        setHora("23");
+      }
+      else if (Number(hora) < 0 || Number(hora) == "") {
+        setHora("00");
+      }
+    } catch {}
   };
 
-  const updateHora = (event, setFunc) => {
-    const regex = /^(2[0-3]|[01]?[0-9])$/;
-    if (regex.test(event.target.value.slice(0, 2).padStart(2, "0")))
-      setFunc(event.target.value.slice(0, 2).padStart(2, "0"));
+  const updateMinuto = (value, setMinuto) => {
+    try {
+      // se houver letras, remove
+      if (isNaN(value)) {
+        value = value.replace(/\D/g, "");
+      }
+      var minuto = value;
+      switch (value.length) {
+        case 1:
+          minuto = "0" + value;
+          setMinuto(minuto);
+          break;
+        case 2:
+          setMinuto(minuto);
+          break;
+        default:
+          minuto = value.substring(1);
+          setMinuto(minuto);
+          break;
+      }
+      if(Number(minuto) > 59) {
+        setMinuto("59");
+      }
+      else if (Number(minuto) < 0 || Number(minuto) == "") {
+        setMinuto("00");
+      }
+
+    } catch (e) {
+    }
   };
 
   const intLeadingZero = (value) => {
@@ -52,6 +104,24 @@ const TurmaCadastroComponent = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (disciplina == "") {
+      alert("Disciplina não pode ser vazia");
+      return;
+    }
+
+    const horario_inicial = `${horarioInicio.hora}:${horarioInicio.minuto}`;
+    const horario_final = `${horarioFim.hora}:${horarioFim.minuto}`;
+
+    if(horario_inicial === horario_final) {
+      alert("Horário inicial e final não podem ser iguais");
+      return;
+    }
+
+    if (Number(horario_inicial.replace(":", "")) > Number(horario_final.replace(":", ""))) {
+      alert("Horário inicial não pode ser maior que o final");
+      return;
+    }
+
     // Perform form validation if needed
     const disciplinaRequest = await axios
       .post(
@@ -60,7 +130,6 @@ const TurmaCadastroComponent = (props) => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
-        console.log(response)
         // Create Professor Disciplina Relationship
         const create_pdl = axios
           .post(
@@ -73,7 +142,6 @@ const TurmaCadastroComponent = (props) => {
         return response.data;
       })
       .catch((error) => {
-        console.log("Create Disciplina", error)
         const response = axios
           .post(
             `${URL_API}/disciplina`,
@@ -81,7 +149,6 @@ const TurmaCadastroComponent = (props) => {
             { headers: { "Content-Type": "application/json" } }
           )
           .then((response) => {
-            console.log(response)
             return response.data;
           })
           .catch((error) => {
@@ -99,27 +166,25 @@ const TurmaCadastroComponent = (props) => {
       vencimento: diaVencimento,
       link_aula: "http://meet.google.com",
       mensalidade: valorHoraAula,
-      horario_inicial: `${horaInicioAula}:${minutoInicioAula}`,
-      horario_final: `${horaFimAula}:${minutoFimAula}`,
+      horario_inicial: horario_inicial,
+      horario_final: horario_final,
       dia_semana: diaDaSemana,
       disciplina_id: disciplinaRequest.id,
       professor_id: user.id,
     };
 
     try {
-      // Send the request to the backend using Axios
-      // console.log(data)
       const response = await axios.post(`${URL_API}/turma`, data, {
         headers: { "Content-Type": "application/json" },
       });
 
-      // Handle the response from the backend
-      console.log(response.data);
+
     } catch (error) {
       // Handle any errors that occur during the request
       console.error("Error:", error);
     }
-
+    alert("Turma cadastrada com sucesso");
+    closeModal(true);
     // Clear the input field
     setDisciplina("");
   };
@@ -135,12 +200,10 @@ const TurmaCadastroComponent = (props) => {
   }
 
   return (
-    <div className={`cadastro02-container ${props.rootClassName}`}>
-      <form className="cadastro02-form">
-        <div className="cadastro02-container1">
-          <h1>Cadastro Nova Turma</h1>
-        </div>
-        <div className="cadastro02-container2">
+    <div className={`cadastro02-container ${rootClassName}`}>
+      <form className="turma-cadastro-form">
+        <h1>Cadastro Nova Turma</h1>
+        <div className="form-control">
           <input
             type="text"
             required
@@ -151,103 +214,104 @@ const TurmaCadastroComponent = (props) => {
             className="enter-text input"
           />
         </div>
-        <div className="cadastro02-container3">
-          <label htmlFor="time01" className="cadastro02-text1">
-            Início aula
+        <div className="form-control">
+          <label htmlFor="dia_semana" className="form-label">
+            Dia da semana
           </label>
-          <div className="cadastro02-container4">
-            <select
-              id="time01"
-              required
-              className="cadastro02-select"
-              value={diaDaSemana}
-              onChange={(event) => setDiaDaSemana(event.target.value)}
-            >
-              <option value="1">Segunda</option>
-              <option value="2">Terça</option>
-              <option value="3">Quarta</option>
-              <option value="4">Quinta</option>
-              <option value="5">Sexta</option>
-              <option value="6">Sábado</option>
-              <option value="7">Domingo</option>
-            </select>
-            <div className="cadastro02-container5">
-              <input
-                type="number"
-                max="23"
-                min="00"
-                step="1"
-                value={intLeadingZero(horaInicioAula)}
-                required
-                autoFocus
-                placeholder="00"
-                className="cadastro02-textinput1 enter-text input"
-                onChange={(event) => updateHora(event, setHoraInicioAula)}
-              />
-              <span>:</span>
-              <input
-                type="number"
-                max="59"
-                min="00"
-                step="1"
-                value={intLeadingZero(minutoInicioAula)}
-                required
-                autoFocus
-                placeholder="00"
-                className="cadastro02-textinput2 enter-text input"
-                onChange={(event) => updateMinuto(event, setMinutoInicioAula)}
-              />
-            </div>
-            <button
-              type="button"
-              className="cadastro02-button button button-main"
-            >
-              +
-            </button>
+          <select
+            id="dia_semana"
+            required
+            className="cadastro02-select"
+            value={diaDaSemana}
+            onChange={(event) => setDiaDaSemana(event.target.value)}
+          >
+            <option value="1">Segunda</option>
+            <option value="2">Terça</option>
+            <option value="3">Quarta</option>
+            <option value="4">Quinta</option>
+            <option value="5">Sexta</option>
+            <option value="6">Sábado</option>
+            <option value="7">Domingo</option>
+          </select>
+        </div>
+        <div className="form-control">
+          <label htmlFor="time01" className="form-label">
+            Início da aula
+          </label>
+          <div className="horario-inicio">
+            <input
+              placeholder="Horario"
+              type="text"
+              id="hora_inicio"
+              className="cadastro02-textinput3 enter-text input"
+              value={horarioInicio.hora}
+              onChange={(e) => {
+                updateHora(e.target.value, (h) => {
+                  setHorarioInicio({
+                    ...horarioInicio,
+                    hora: h,
+                  });
+                });
+              }}
+            />
+            :
+            <input
+              placeholder="Minuto"
+              type="text"
+              id="minuto_inicio"
+              className="cadastro02-textinput3 enter-text input"
+              value={horarioInicio.minuto}
+              onChange={(e) => {
+                updateMinuto(e.target.value, (m) => {
+                  setHorarioInicio({
+                    ...horarioInicio,
+                    minuto: m,
+                  });
+                });
+              }}
+            />
           </div>
         </div>
-        <div className="cadastro02-container8">
-          <label htmlFor="time01" className="cadastro02-text3">
-            Horário fim da aula
+        <div className="form-control">
+          <label htmlFor="time01" className="form-label">
+            Fim da aula
           </label>
-          <div className="cadastro02-container9">
-            <div className="cadastro02-container5">
-              <input
-                type="number"
-                max="23"
-                min="00"
-                step="1"
-                value={intLeadingZero(horaFimAula)}
-                required
-                autoFocus
-                placeholder="00"
-                className="cadastro02-textinput3 enter-text input"
-                onChange={(event) => updateHora(event, setHoraFimAula)}
-              />
-              <span>:</span>
-              <input
-                type="number"
-                max="59"
-                min="00"
-                step="1"
-                value={intLeadingZero(minutoFimAula)}
-                required
-                autoFocus
-                placeholder="00"
-                className="cadastro02-textinput4 enter-text input"
-                onChange={(event) => updateMinuto(event, setMinutoFimAula)}
-              />
-            </div>
-            <button
-              type="button"
-              className="cadastro02-button button button-main"
-            >
-              +
-            </button>
+          <div className="horario-fim">
+            <input
+              placeholder="Horario"
+              type="text"
+              id="hora_fim"
+              className="cadastro02-textinput4 enter-text input"
+              value={horarioFim.hora}
+              onChange={(e) => {
+                updateHora(e.target.value, (h) => {
+                  setHorarioFim({
+                    ...horarioFim,
+                    hora: h,
+                  });
+                });
+              }}
+            />
+            :
+            <input
+              placeholder="Minuto"
+              type="text"
+              id="minuto_fim"
+              className="cadastro02-textinput4 enter-text input"
+              value={horarioFim.minuto}
+              onChange={(e) => {
+                updateMinuto(e.target.value, (m) => {
+                  setHorarioFim({
+                    ...horarioFim,
+                    minuto: m,
+                  });
+                });
+              }}
+            />
           </div>
         </div>
-        <div className="cadastro02-container6">
-          <label htmlFor="time01" className="cadastro02-text2">
+        <div className="form-control">
+          <label htmlFor="time01" className="form-label">
             Valor da hora aula
           </label>
           <input
@@ -259,8 +323,8 @@ const TurmaCadastroComponent = (props) => {
             onChange={handleValorChange}
           />
         </div>
-        <div className="cadastro02-container12">
-          <label htmlFor="time01" className="cadastro02-text5">
+        <div className="form-control">
+          <label htmlFor="time01" className="form-label">
             Dia do vencimento
           </label>
           <select
@@ -283,32 +347,6 @@ const TurmaCadastroComponent = (props) => {
       </form>
     </div>
   );
-};
-
-TurmaCadastroComponent.defaultProps = {
-  text: "Horários de Aula",
-  textinput_placeholder4: "00",
-  heading: "Cadastro Nova Turma",
-  textinput_placeholder: "Disciplina",
-  textinput_placeholder2: "Dia de Vencimento",
-  rootClassName: "",
-  button: "+",
-  textinput_placeholder3: "00",
-  textinput_placeholder1: "Valor por aula",
-  text1: ":",
-};
-
-TurmaCadastroComponent.propTypes = {
-  text: PropTypes.string,
-  textinput_placeholder4: PropTypes.string,
-  heading: PropTypes.string,
-  textinput_placeholder: PropTypes.string,
-  textinput_placeholder2: PropTypes.string,
-  rootClassName: PropTypes.string,
-  button: PropTypes.string,
-  textinput_placeholder3: PropTypes.string,
-  textinput_placeholder1: PropTypes.string,
-  text1: PropTypes.string,
 };
 
 export default TurmaCadastroComponent;

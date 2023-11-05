@@ -9,10 +9,8 @@ const InputField = ({ placeholder, className, handler }) => (
       className="input-field"
       onChange={(event) => {
         try {
-          console.log(typeof handler);
           handler(event.target.value);
         } catch (error) {
-          console.log(error);
         }
       }}
     />

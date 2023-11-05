@@ -58,7 +58,7 @@ const AlunoCadastro = ({ closeModal, user, editAluno }) => {
       }
 
       alert(`Aluno ${textoResposta} com sucesso`);
-      closeModal();
+      closeModal(true);
     } catch (error) {
       alert(`Erro ao ${textoErro} aluno`);
     }
@@ -89,7 +89,6 @@ const AlunoCadastro = ({ closeModal, user, editAluno }) => {
     if (user) {
       loadTurmas();
 
-      console.log("RECEBI O ALUNO!!!", editAluno)
       if(editAluno) {
         setNome(editAluno.nome);
         setDataNasc(editAluno.data_nascimento);

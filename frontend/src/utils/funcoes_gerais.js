@@ -33,9 +33,22 @@ export const exibeDataInternacional = (data) => {
     // retorna 2023-10-30
     if (data) {
         // data vem em formato Date
-        const dia = data.getDate();
-        const mes = data.getMonth() + 1;
+        const dia = data.getDate().toString().padStart(2, "0");
+        const mes = (data.getMonth() + 1).toString().padStart(2, "0");
         const ano = data.getFullYear();
         return `${ano}-${mes}-${dia}`;
+    }
+}
+
+export const exibeDataNacional = (data) => {
+    // retorna 30/10/2023
+    if (data) {
+        // adiciona 3 horas
+        data.setHours(data.getHours() + 3);
+        // data vem em formato Date
+        const dia = data.getDate().toString().padStart(2, "0");
+        const mes = (data.getMonth() + 1).toString().padStart(2, "0");
+        const ano = data.getFullYear();
+        return `${dia}/${mes}/${ano}`;
     }
 }

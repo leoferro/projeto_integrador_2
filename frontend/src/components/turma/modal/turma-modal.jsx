@@ -1,12 +1,12 @@
 import { TurmaCadastroComponent } from "../../turma";
 import "./turma-modal.css";
 
-const TurmaModal = (props) => {
+const TurmaModal = ({ closeModal }) => {
   return (
     <>
       <div className="turmas-cadastro-nova-turma">
         <div className="turmas-cadastro-container01">
-          <TurmaCadastroComponent />
+          <TurmaCadastroComponent closeModal={closeModal} />
         </div>
       </div>
     </>

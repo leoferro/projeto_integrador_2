@@ -100,6 +100,16 @@
   opacity: 0.75;
 }
 
+.button-danger {
+  color: rgb(255, 255, 255);
+  background-color: rgb(243, 45, 45);
+  border-color: rgb(255, 255, 255);
+}
+
+.button-danger:hover {
+  opacity: 0.75;
+}
+
 .quick-links {
   gap: var(--dl-space-space-unit);
   width: 100%;

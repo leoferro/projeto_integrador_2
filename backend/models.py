@@ -5,7 +5,7 @@ from sqlmodel import Field, Relationship, SQLModel, create_engine
 
 __all__ = ["Aluno", "Disciplina", "Pagamento", "Professor", "Turma", "AlunoTurmaLink", "engine"]
 
-engine = create_engine("postgresql://postgres@host.docker.internal:5432/pi")
+engine = create_engine("postgresql://postgres@database.docker.internal:5432/pi")
 
 class ProfessorDisciplinaLink(SQLModel, table=True):
     professor_id : int | None = Field(default=None, primary_key=True, foreign_key="professor.id")

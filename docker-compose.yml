@@ -4,6 +4,7 @@ services:
   postgres:
     image: postgres:15.2-bullseye
     container_name: dev_database
+    hostname: database.docker.internal
     environment:
       POSTGRES_DB: pi
       POSTGRES_HOST_AUTH_METHOD: trust

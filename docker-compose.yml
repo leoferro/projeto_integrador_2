@@ -12,6 +12,8 @@ services:
     ports:
       - '5432:5432'
     restart: always
+    networks:
+      - 'pi2'
 
   backend:
     build: ./backend/
@@ -24,6 +26,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always
+    networks:
+      - 'pi2'
 
   frontend:
     build: ./frontend/
@@ -37,6 +41,11 @@ services:
     depends_on:
       - backend
     restart: always
+    networks:
+      - 'pi2'
 
 volumes:
   postgres_data:
+
+networks:
+  pi2:
